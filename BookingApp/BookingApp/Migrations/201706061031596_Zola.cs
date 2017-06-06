@@ -25,8 +25,8 @@ namespace BookingApp.Migrations
                         User_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AccommodationTypes", t => t.AccomodationType_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Places", t => t.Place_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AccommodationTypes", t => t.AccomodationType_Id, cascadeDelete: false)
+                .ForeignKey("dbo.Places", t => t.Place_Id, cascadeDelete: false)
                 .ForeignKey("dbo.AppUsers", t => t.User_Id, cascadeDelete: true)
                 .Index(t => t.AccomodationType_Id)
                 .Index(t => t.Place_Id)
@@ -52,8 +52,8 @@ namespace BookingApp.Migrations
                         User_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Accommodations", t => t.Accomodation_Id, cascadeDelete: true)
-                .ForeignKey("dbo.AppUsers", t => t.User_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Accommodations", t => t.Accomodation_Id, cascadeDelete: false)
+                .ForeignKey("dbo.AppUsers", t => t.User_Id, cascadeDelete: false)
                 .Index(t => t.Accomodation_Id)
                 .Index(t => t.User_Id);
             
@@ -86,7 +86,7 @@ namespace BookingApp.Migrations
                         Accomodation_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Accommodations", t => t.Accomodation_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Accommodations", t => t.Accomodation_Id, cascadeDelete: false)
                 .Index(t => t.Accomodation_Id);
             
             CreateTable(
@@ -98,19 +98,19 @@ namespace BookingApp.Migrations
                         Region_Id = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Regions", t => t.Region_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Regions", t => t.Region_Id, cascadeDelete: false)
                 .Index(t => t.Region_Id);
-            
+
             CreateTable(
                 "dbo.Regions",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Country_Id = c.Int(nullable: false),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    Country_Id = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Countries", t => t.Country_Id, cascadeDelete: true)
+                .ForeignKey("dbo.Countries", t => t.Country_Id, cascadeDelete: false)
                 .Index(t => t.Country_Id);
             
             CreateTable(
