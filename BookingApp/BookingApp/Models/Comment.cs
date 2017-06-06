@@ -9,5 +9,7 @@ namespace BookingApp.Models
     {
         public int Grade { get; set; }
         public string Text { get; set; }
+        public List<User> Users { get; set; }
+        public List<Accommodation> Accomodations { get; set; }
     }
 }
