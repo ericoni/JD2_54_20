@@ -16,9 +16,10 @@ namespace BookingApp.Models
         public string Longitude { get; set; }
         public string ImageURL { get; set; }
         public bool Approved { get; set; }
-		public User user {get; set; }
+		public User User {get; set; }
         public List<Room> Rooms { get; set; }
         public List<Comment> Comments { get; set; }
         public AccommodationType accomodationType { get; set; }
+        public Place Place { get; set; }
     }
 }
