@@ -19,7 +19,6 @@ namespace BookingApp.Models
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomReservations> RoomReservationss { get; set; }
-        public virtual DbSet<User> Userss { get; set; }
 
         public BAContext() : base("name=BADB")
         {            
