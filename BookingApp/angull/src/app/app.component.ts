@@ -12,4 +12,9 @@ export class AppComponent {
     { boja: "crvena", naziv: "jagoda" },
     { boja: "zuta", naziv: "limun" }
   ];
+
+  public clickedItem = { name: "" };
+  onItemClicked(Item) {
+    this.clickedItem = Item;
+  }
 }
