@@ -1,5 +1,5 @@
 <!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
+<!--<div style="text-align:center">
   <h1>
     Welcome to {{title}}!!
   </h1>
@@ -26,5 +26,27 @@
             <td>{{vocka.naziv}}</td>
             <td>{{vocka.boja}}</td>
         <tr>
-</table>
+</table>-->
+<a class="menu-bar" data-toggle="collapse" href="#menu">
+            <span class="bars"></span>            
+        </a>
+    	<div class="collapse menu" id="menu">
+            <ul class="list-inline">
+                <li><a [routerLink]="['/users']">Users</a></li>
+                <!--<li><a [routerLink]="['/roomReservations']">RoomReservations</a></li>
+                <li><a [routerLink]="['/rooms']">Rooms</a></li>
+                <li><a [routerLink]="['/accommodationTypes']">AccommodationTypes</a></li>
+                <li><a [routerLink]="['/comments']">Comments</a></li>
+                <li><a [routerLink]="['/accommodations']">Accommodations</a></li>
+                <li><a [routerLink]="['/regions']">Regions</a></li>
+                <li><a [routerLink]="['/countries']">Countries</a></li>
+                <li><a [routerLink]="['/places']">Places</a></li>-->
+            </ul>   
+    	</div>
+      <router-outlet></router-outlet>
+        <!--<div class="container">
+            <div class="row">
+                <h2 class="text-center">Content goes here</h2>
+            </div>
+        </div> -->
 
