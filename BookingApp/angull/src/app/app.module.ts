@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
-import { RoomReservationsComponent } from './roomReservation/roomReservation.component';
+import { RoomReservationComponent } from './roomReservation/roomReservation.component';
 import { RoomComponent } from './room/room.component';
 import { AccommodationTypeComponent } from './accommodationType/accommodationType.component';
 import { CommentComponent } from './comment/comment.component';
@@ -15,7 +15,7 @@ import { PlaceComponent } from './place/place.component';
 
 const Routes = [
   {path: "users", component: UserComponent},
-   {path: "roomReservations", component: RoomReservationsComponent},
+   {path: "roomReservations", component: RoomReservationComponent},
    {path: "rooms", component: RoomComponent},
    {path: "accommodationTypes", component: AccommodationTypeComponent},
    {path: "comments", component: CommentComponent},
@@ -29,7 +29,7 @@ const Routes = [
   declarations: [
     AppComponent,
     UserComponent,
-    RoomReservationsComponent,
+    RoomReservationComponent,
     RoomComponent,
     AccommodationTypeComponent,
     CommentComponent,
