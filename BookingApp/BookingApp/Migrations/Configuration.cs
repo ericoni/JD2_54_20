@@ -28,7 +28,7 @@ namespace BookingApp.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
+            
             var user = new AppUser();
             user.Id = 10;
             user.Username = "username1";
@@ -41,8 +41,19 @@ namespace BookingApp.Migrations
             user2.Password = "pw2";
             user2.Email = "user2@gmail.com";
 
+            var accomType = new AccommodationType();
+            accomType.Id = 77777;
+            accomType.Name = "Motel";
+            accomType.Accommodations = null;
+
+            var accomType2 = new AccommodationType();
+            accomType2.Id = 77778;
+            accomType2.Name = "Hotel";
+            accomType2.Accommodations = null;
+
             var accomod = new Accommodation();
             var accomod2 = new Accommodation();
+            var accomods = new List<Accommodation>() { accomod, accomod2 };
 
             var place = new Place();
             var place2 = new Place();
@@ -50,11 +61,10 @@ namespace BookingApp.Migrations
             var roomReservations = new RoomReservations();
             var roomReservations2 = new RoomReservations();
 
-            var comments = new List<Comment>()
-            {
-                new Comment() { User = user, Text ="dobar", Grade = 10, Accomodation = accomod  },
-                new Comment() { User = user2, Text ="los", Grade = 2, Accomodation = accomod2  },
-            };
+            var comment = new Comment() { User = user, Text = "dobar", Grade = 10, Accomodation = null };
+            var comment2 = new Comment() { User = user2, Text = "los", Grade = 2, Accomodation = null };
+
+            var comments = new List<Comment>() { comment, comment2 };
 
             var users = new List<AppUser>() { new AppUser() { Id = 10, Email = "lija@live.com", Username = "user1", Comments = comments } };
 
@@ -68,12 +78,12 @@ namespace BookingApp.Migrations
             accomod2.Approved = true;
             accomod2.Comments = comments;
             accomod2.AvrageGrade = 40;
-            accomod.Description = "opisAccom2";
+            accomod2.Description = "opisAccom2";
 
             var region = new Region();
             region.Id = 1111;
             region.Name = "Zlatibor";
-            region.Places =  new List<Place>() { place, place2 };
+            region.Places = new List<Place>() { place, place2 };
 
             var region2 = new Region();
             region2.Id = 1112;
@@ -84,7 +94,7 @@ namespace BookingApp.Migrations
             place.Name = "place1";
             place.Region = region;
             place.Accommodations = new List<Accommodation>() { accomod, accomod2 };
-  
+
             place2.Id = 1112;
             place2.Name = "place2";
             place2.Region = region;
@@ -133,6 +143,64 @@ namespace BookingApp.Migrations
             roomReservations2.Timestamp = 5;
             roomReservations2.StartDate = new DateTime(2017, 3, 3);
             roomReservations2.EndDate = new DateTime(2017, 4, 4);
+
+            try
+            {
+                comment.Accomodation = accomod;
+                comment2.Accomodation = accomod2;
+                context.Comments.AddOrUpdate(comment);
+                context.SaveChanges();
+                context.Comments.AddOrUpdate(comment2);
+                context.SaveChanges();
+
+                context.AppUsers.AddOrUpdate(user);
+                context.SaveChanges();
+                context.AppUsers.AddOrUpdate(user2);
+                context.SaveChanges();
+
+                context.Accommodations.AddOrUpdate(accomod);
+                context.SaveChanges();
+                context.Accommodations.AddOrUpdate(accomod2);
+                context.SaveChanges();
+
+                context.Regions.AddOrUpdate(region);
+                context.SaveChanges();
+                context.Regions.AddOrUpdate(region2);
+                context.SaveChanges();
+
+                context.Places.AddOrUpdate(place);
+                context.SaveChanges();
+                context.Places.AddOrUpdate(place2);
+                context.SaveChanges();
+
+                context.Rooms.AddOrUpdate(room);
+                context.SaveChanges();
+                context.Rooms.AddOrUpdate(room2);
+                context.SaveChanges();
+
+                context.Countrys.AddOrUpdate(country);
+                context.SaveChanges();
+                context.Countrys.AddOrUpdate(country2);
+                context.SaveChanges();
+
+                context.RoomReservationss.AddOrUpdate(roomReservations);
+                context.SaveChanges();
+                context.RoomReservationss.AddOrUpdate(roomReservations2);
+                context.SaveChanges();
+
+                accomType.Accommodations = accomods;
+                accomType2.Accommodations = accomods;
+                context.AccommodationTypes.AddOrUpdate(accomType);
+                context.SaveChanges();
+                context.AccommodationTypes.AddOrUpdate(accomType2);
+                context.SaveChanges();
+            }
+
+            catch (Exception e)
+            {
+
+            }
+            
         }
     }
 }
