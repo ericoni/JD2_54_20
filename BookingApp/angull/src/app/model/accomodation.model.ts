@@ -1,4 +1,3 @@
-
 export class Accommodation{
 
     constructor(public Id:number, 
