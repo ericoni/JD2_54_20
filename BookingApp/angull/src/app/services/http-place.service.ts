@@ -12,7 +12,7 @@ export class HttpPlaceService{
 
     getProducts(): Observable<any> {
 
-        return this.http.get("http://localhost:3367/api/appuser").map(this.extractData);        
+        return this.http.get("http://localhost:54042/api/places").map(this.extractData);        
     }
 
     private extractData(res: Response) {
