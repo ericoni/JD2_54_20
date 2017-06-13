@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -12,6 +13,8 @@ import { AccommodationComponent } from './accommodation/accommodation.component'
 import { RegionComponent } from './region/region.component';
 import { CountryComponent } from './country/country.component';
 import { PlaceComponent } from './place/place.component';
+import { HttpUserService } from './services/http-user.service';
+import { HttpPlaceService } from './services/http-place.service';
 
 const Routes = [
   {path: "users", component: UserComponent},
@@ -40,9 +43,11 @@ const Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(Routes)
+    RouterModule.forRoot(Routes),
+    HttpModule,
+    JsonpModule
   ],
-  providers: [],
+  providers: [HttpUserService, HttpPlaceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
