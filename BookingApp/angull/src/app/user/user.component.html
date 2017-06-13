@@ -2,9 +2,10 @@
         <tr>
             <th>id</th><th>name</th><th>color</th>
         <tr>
-        <tr *ngFor="let vocka of voce;let i = index;">
+        <tr *ngFor="let user of users;let i = index;">
             <td>{{i + 1}}</td>
-            <td>{{user.id}}</td>
-            <td>{{user.name}}</td>
+            <td>{{user.Id}}</td>
+            <td>{{user.Username}}</td>
+            <td>{{user.Password}}</td>
         <tr>
 </table>
