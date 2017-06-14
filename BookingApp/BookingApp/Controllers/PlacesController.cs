@@ -78,9 +78,14 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            var a = place.Region.Id;
+            var region = db.Regions.SingleOrDefault(r => r.Id == place.Region.Id);
+            place.Region = region;
             db.Places.Add(place);
             db.SaveChanges();
+            /*
+             db.Regions.SingleOrDefault(r => r.Id == id);
+            place.Region = region;*/
 
             return CreatedAtRoute("DefaultApi", new { id = place.Id }, place);
         }

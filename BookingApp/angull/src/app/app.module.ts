@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -45,7 +46,8 @@ const Routes = [
     BrowserModule,
     RouterModule.forRoot(Routes),
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    FormsModule
   ],
   providers: [HttpUserService, HttpPlaceService],
   bootstrap: [AppComponent]
