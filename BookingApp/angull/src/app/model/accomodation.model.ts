@@ -1,9 +1,18 @@
+import { AccommodationType } from '../model/accommodation-type.model';
+import { User } from '../model/user.model';
+import { Room } from '../model/room.model';
+import { Place } from '../model/place.model';
+
 export class Accommodation{
 
-    constructor(public Id:number, 
-    public Username: string, public Email: string,
-    public Password: string, public Comments: Comment[],
-    public Accomodations: Accommodation[]
+    constructor(public Id: number, 
+    public Name: string, public Description: string,
+    public Address: string, public AvrageGrade: number,
+    public Latitude: string, public Longitude: string,
+    public ImageURL: string, public Approved: boolean,
+    public AppUser: User, public Rooms: Room[],
+    public Comments: Comment[], public AccomodationType: AccommodationType,
+    public Place: Place
      ){
 
 
