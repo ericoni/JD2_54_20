@@ -1,0 +1,11 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="username">User</label>
+      <input type="text" name="Name" ngModel>
+    </div>
+    <div>
+      <label for="password">Pass</label>
+      <input type="text" name="Pass" ngModel>
+    </div>
+    <input type="submit">
+  </form>
