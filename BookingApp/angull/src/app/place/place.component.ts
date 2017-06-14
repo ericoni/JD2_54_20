@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {NgForm} from '@angular/forms';
+import { Http, Response } from '@angular/http';
+
 import { HttpPlaceService } from '../services/http-place.service'
 import { Place } from '../model/place.model';
+import { Region } from '../model/region.model';
 
 @Component({
   selector: 'app-place',
@@ -9,15 +13,27 @@ import { Place } from '../model/place.model';
 })
 export class PlaceComponent implements OnInit {
   places: Place[];
+  regions: Region[];
 
   constructor(private httpPlaceService: HttpPlaceService) {
   }
 
   ngOnInit() {
-     this.httpPlaceService.getProducts().subscribe(
-      (pl: any) => {this.places = pl; console.log(this.places)},//You can set the type to Product.
+     this.httpPlaceService.getRegions().subscribe(
+      (r: any) => {this.regions = r; console.log(this.regions)},
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
+  }
+
+   onSubmit(place: Place, form: NgForm) {
+    console.log(place);
+    this.httpPlaceService.postPlace(place).subscribe(this.onPost);
+    form.reset();
+  }
+
+  onPost(res : any) : void{
+    alert("Post!");
+    console.log(res.json());
   }
 
 }
