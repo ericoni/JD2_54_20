@@ -1,4 +1,4 @@
-import { Accommodation } from '../model/accomodation.model';
+import { Accommodation } from '../model/accommodation.model';
 import { RoomReservation } from '../model/room-reservation.model';
 
 export class Room{

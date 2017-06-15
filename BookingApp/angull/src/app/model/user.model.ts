@@ -1,4 +1,4 @@
-import { Accommodation } from '../model/accomodation.model';
+import { Accommodation } from '../model/accommodation.model';
 import { Comment } from '../model/comment.model';
 
 export class User{

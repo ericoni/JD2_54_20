@@ -79,11 +79,11 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            //Place place = db.Places.SingleOrDefault(a=> a.Id == accommodation.Place.Id);
-            //accommodation.Place = place;
+            Place place = db.Places.SingleOrDefault(a => a.Id == accommodation.Place.Id);
+            accommodation.Place = place;
 
-            //AccommodationType aType = db.AccommodationTypes.SingleOrDefault(a => a.Id == accommodation.AccomodationType.Id);
-            //accommodation.AccomodationType = aType;
+            AccommodationType aType = db.AccommodationTypes.SingleOrDefault(a => a.Id == accommodation.AccomodationType.Id);
+            accommodation.AccomodationType = aType;
 
             db.Accommodations.Add(accommodation);
             db.SaveChanges();

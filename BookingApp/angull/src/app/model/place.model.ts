@@ -1,4 +1,4 @@
-import { Accommodation } from '../model/accomodation.model';
+import { Accommodation } from '../model/accommodation.model';
 import { Region } from '../model/region.model';
 
 export class Place{

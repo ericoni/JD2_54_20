@@ -89,6 +89,7 @@ namespace BookingApp.Migrations
             //place2.Accommodations = new List<Accommodation>() { accomod, accomod2 };
 
             accomod.Address = "Jovana Subotica";
+            accomod.Name = "accomod1";
             accomod.Approved = true;
             accomod.User = user;
             //accomod.Comments = comments;
@@ -102,6 +103,7 @@ namespace BookingApp.Migrations
             //accomod.Rooms = rooms;
 
             accomod2.Address = "Nikole Pasica";
+            accomod2.Name = "accomod2";
             accomod2.Approved = true;
             accomod2.User = user2;
             //accomod2.Comments = comments;

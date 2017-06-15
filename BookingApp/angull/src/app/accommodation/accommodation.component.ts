@@ -19,26 +19,30 @@ export class AccommodationComponent implements OnInit {
   places: Place[];
   users: User[];
   accommodationTypes: AccommodationType[];
+  error: any;
   
   constructor(private httpAccommodationService: HttpAccommodationService, 
   private httpPlaceService: HttpPlaceService, private httpAccommodationTypeService: HttpAccommodationTypeService) {
   }
 
   ngOnInit() {
-  this.httpPlaceService.getPlaces().subscribe(
-      (r: any) => {this.places = r; console.log(this.places)},
-      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    );
+  // this.httpPlaceService.getPlaces().subscribe(
+  //     (r: any) => {this.places = r; console.log(this.places)},
+  //     error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+  //   );
  
-    this.httpAccommodationTypeService.getAccommodationTypes().subscribe(
-      (ap: any) => {this.accommodationTypes = ap; console.log(this.accommodationTypes)},
-      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    );
+    // this.httpAccommodationTypeService.getAccommodationTypes().subscribe(
+    //   (ap: any) => {this.accommodationTypes = ap; console.log(this.accommodationTypes)},
+    //   error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+    // );
+    this.httpAccommodationTypeService.getAccommodationTypes().then(accommodationTypes => this.accommodationTypes = accommodationTypes).catch(error => this.error = error);
+    this.httpPlaceService.getPlaces().then(places => this.places = places).catch(error => this.error = error);
   }
 
  onSubmit(accomodation: any, form: NgForm) {
     console.log(accomodation);
-    this.httpAccommodationService.postAccommodation(accomodation).subscribe(this.onPost);
+    this.httpAccommodationService.postAccommodation(accomodation);
+   //this.httpAccommodationService.postAccommodation(accomodation).subscribe(this.onPost);
     form.reset();
   }
 
@@ -47,6 +51,4 @@ export class AccommodationComponent implements OnInit {
     console.log(res.json());
   }
  
-
-
 }

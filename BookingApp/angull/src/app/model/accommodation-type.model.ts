@@ -1,4 +1,4 @@
-import { Accommodation } from '../model/accomodation.model';
+import { Accommodation } from '../model/accommodation.model';
 
 export class AccommodationType{
     constructor(public Id: number, 
