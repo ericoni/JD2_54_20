@@ -18,7 +18,7 @@ namespace BookingApp.Models
         public string ImageURL { get; set; }
         public bool Approved { get; set; }
         [Required]
-        public AppUser User {get; set; }
+        public BAIdentityUser UserOwner {get; set; }
         public List<Room> Rooms { get; set; }
         public List<Comment> Comments { get; set; }
         [Required]

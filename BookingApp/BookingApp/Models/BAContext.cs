@@ -9,8 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace BookingApp.Models
 {
     public class BAContext: IdentityDbContext<BAIdentityUser>
-    {   
-        public virtual DbSet<AppUser> AppUsers { get; set; }
+    {
         public virtual DbSet<Accommodation> Accommodations { get; set; }
         public virtual DbSet<AccommodationType> AccommodationTypes { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
@@ -20,7 +19,7 @@ namespace BookingApp.Models
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomReservations> RoomReservationss { get; set; }
 
-        public BAContext() : base("name=Database1") //e("name=BADB")
+        public BAContext() : base("name=BADB") //e("name=BADB")
         {            
         }
 
@@ -28,5 +27,7 @@ namespace BookingApp.Models
         {
             return new BAContext();
         }
+
+       
     }
 }

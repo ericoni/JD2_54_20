@@ -12,7 +12,7 @@ namespace BookingApp.Models
         public int Grade { get; set; }
         public string Text { get; set; }
         [Required]
-        public AppUser User { get; set; }
+        public BAIdentityUser User { get; set; }
         [Required]
         public Accommodation Accomodation { get; set; }
     }

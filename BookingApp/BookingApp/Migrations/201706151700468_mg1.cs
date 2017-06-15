@@ -3,7 +3,7 @@ namespace BookingApp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Zola : DbMigration
+    public partial class mg1 : DbMigration
     {
         public override void Up()
         {
@@ -22,15 +22,15 @@ namespace BookingApp.Migrations
                         Approved = c.Boolean(nullable: false),
                         AccomodationType_Id = c.Int(nullable: false),
                         Place_Id = c.Int(nullable: false),
-                        User_Id = c.Int(nullable: false),
+                        UserOwner_Id = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AccommodationTypes", t => t.AccomodationType_Id, cascadeDelete: false)
                 .ForeignKey("dbo.Places", t => t.Place_Id, cascadeDelete: false)
-                .ForeignKey("dbo.AppUsers", t => t.User_Id, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserOwner_Id, cascadeDelete: false)
                 .Index(t => t.AccomodationType_Id)
                 .Index(t => t.Place_Id)
-                .Index(t => t.User_Id);
+                .Index(t => t.UserOwner_Id);
             
             CreateTable(
                 "dbo.AccommodationTypes",
@@ -49,13 +49,71 @@ namespace BookingApp.Migrations
                         Grade = c.Int(nullable: false),
                         Text = c.String(),
                         Accomodation_Id = c.Int(nullable: false),
-                        User_Id = c.Int(nullable: false),
+                        User_Id = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Accommodations", t => t.Accomodation_Id, cascadeDelete: false)
-                .ForeignKey("dbo.AppUsers", t => t.User_Id, cascadeDelete: false)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id, cascadeDelete: false)
                 .Index(t => t.Accomodation_Id)
                 .Index(t => t.User_Id);
+            
+            CreateTable(
+                "dbo.AspNetUsers",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Email = c.String(maxLength: 256),
+                        EmailConfirmed = c.Boolean(nullable: false),
+                        PasswordHash = c.String(),
+                        SecurityStamp = c.String(),
+                        PhoneNumber = c.String(),
+                        PhoneNumberConfirmed = c.Boolean(nullable: false),
+                        TwoFactorEnabled = c.Boolean(nullable: false),
+                        LockoutEndDateUtc = c.DateTime(),
+                        LockoutEnabled = c.Boolean(nullable: false),
+                        AccessFailedCount = c.Int(nullable: false),
+                        UserName = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserClaims",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        ClaimType = c.String(),
+                        ClaimValue = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserLogins",
+                c => new
+                    {
+                        LoginProvider = c.String(nullable: false, maxLength: 128),
+                        ProviderKey = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
             
             CreateTable(
                 "dbo.RoomReservations",
@@ -66,11 +124,11 @@ namespace BookingApp.Migrations
                         EndDate = c.DateTime(nullable: false),
                         Timestamp = c.Int(nullable: false),
                         Room_Id = c.Int(),
-                        User_Id = c.Int(),
+                        User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Rooms", t => t.Room_Id)
-                .ForeignKey("dbo.AppUsers", t => t.User_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
                 .Index(t => t.Room_Id)
                 .Index(t => t.User_Id);
             
@@ -100,15 +158,15 @@ namespace BookingApp.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Regions", t => t.Region_Id, cascadeDelete: false)
                 .Index(t => t.Region_Id);
-
+            
             CreateTable(
                 "dbo.Regions",
                 c => new
-                {
-                    Id = c.Int(nullable: false, identity: true),
-                    Name = c.String(),
-                    Country_Id = c.Int(nullable: false),
-                })
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Country_Id = c.Int(nullable: false),
+                    })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Countries", t => t.Country_Id, cascadeDelete: false)
                 .Index(t => t.Country_Id);
@@ -123,43 +181,60 @@ namespace BookingApp.Migrations
                     })
                 .PrimaryKey(t => t.Id);
             
-            AddColumn("dbo.AppUsers", "Username", c => c.String());
-            AddColumn("dbo.AppUsers", "Email", c => c.String());
-            AddColumn("dbo.AppUsers", "Password", c => c.String());
-            DropColumn("dbo.AppUsers", "FullName");
+            CreateTable(
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
         }
         
         public override void Down()
         {
-            AddColumn("dbo.AppUsers", "FullName", c => c.Int(nullable: false));
-            DropForeignKey("dbo.Accommodations", "User_Id", "dbo.AppUsers");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Accommodations", "UserOwner_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Accommodations", "Place_Id", "dbo.Places");
             DropForeignKey("dbo.Places", "Region_Id", "dbo.Regions");
             DropForeignKey("dbo.Regions", "Country_Id", "dbo.Countries");
-            DropForeignKey("dbo.Comments", "User_Id", "dbo.AppUsers");
-            DropForeignKey("dbo.RoomReservations", "User_Id", "dbo.AppUsers");
+            DropForeignKey("dbo.Comments", "User_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.RoomReservations", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.RoomReservations", "Room_Id", "dbo.Rooms");
             DropForeignKey("dbo.Rooms", "Accomodation_Id", "dbo.Accommodations");
+            DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Comments", "Accomodation_Id", "dbo.Accommodations");
             DropForeignKey("dbo.Accommodations", "AccomodationType_Id", "dbo.AccommodationTypes");
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Regions", new[] { "Country_Id" });
             DropIndex("dbo.Places", new[] { "Region_Id" });
             DropIndex("dbo.Rooms", new[] { "Accomodation_Id" });
             DropIndex("dbo.RoomReservations", new[] { "User_Id" });
             DropIndex("dbo.RoomReservations", new[] { "Room_Id" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
+            DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.Comments", new[] { "User_Id" });
             DropIndex("dbo.Comments", new[] { "Accomodation_Id" });
-            DropIndex("dbo.Accommodations", new[] { "User_Id" });
+            DropIndex("dbo.Accommodations", new[] { "UserOwner_Id" });
             DropIndex("dbo.Accommodations", new[] { "Place_Id" });
             DropIndex("dbo.Accommodations", new[] { "AccomodationType_Id" });
-            DropColumn("dbo.AppUsers", "Password");
-            DropColumn("dbo.AppUsers", "Email");
-            DropColumn("dbo.AppUsers", "Username");
+            DropTable("dbo.AspNetRoles");
             DropTable("dbo.Countries");
             DropTable("dbo.Regions");
             DropTable("dbo.Places");
             DropTable("dbo.Rooms");
             DropTable("dbo.RoomReservations");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.AspNetUserClaims");
+            DropTable("dbo.AspNetUsers");
             DropTable("dbo.Comments");
             DropTable("dbo.AccommodationTypes");
             DropTable("dbo.Accommodations");
