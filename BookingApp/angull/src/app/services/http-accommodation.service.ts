@@ -87,7 +87,7 @@ export class HttpAccommodationService{
                 User: {
 
                 },
-                AccomodationType: {
+                AccommodationType: {
                     Id: accommodation.AccommodationType,
                 },
                 Place: {

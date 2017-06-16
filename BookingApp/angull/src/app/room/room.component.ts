@@ -25,6 +25,7 @@ export class RoomComponent implements OnInit {
 
   onSubmit(room: any, form: NgForm) {
     console.log(room);
+    debugger
     this.httpRoomService.postRoom(room);
    //this.httpAccommodationService.postAccommodation(accomodation).subscribe(this.onPost);
     form.reset();

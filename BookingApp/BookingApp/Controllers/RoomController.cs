@@ -79,6 +79,9 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
+            var accommodation = db.Accommodations.SingleOrDefault(r=> r.Id == room.Accomodation.Id);
+            room.Accomodation = accommodation;
+
             db.Rooms.Add(room);
             db.SaveChanges();
 

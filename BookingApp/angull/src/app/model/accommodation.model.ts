@@ -11,7 +11,7 @@ export class Accommodation{
     public Latitude: string, public Longitude: string,
     public ImageURL: string, public Approved: boolean,
     public AppUser: User, public Rooms: Room[],
-    public Comments: Comment[], public AccomodationType: AccommodationType,
+    public Comments: Comment[], public AccommodationType: AccommodationType,
     public Place: Place
      ){
 

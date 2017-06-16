@@ -22,7 +22,7 @@ export class HttpRoomService{
 
     postRoom(room: any): Promise<any> {
         return this.http
-            .post('http://localhost:54042/api/Rooms', 
+            .post('http://localhost:54042/api/Room', 
             JSON.stringify({
                 RoomNumber: room.RoomNumber,
                 BedCount: room.BedCount,
@@ -30,7 +30,21 @@ export class HttpRoomService{
                 PricePerNight: room.PricePerNight,
                     
                 Accomodation: {
-                    Id: room.Accomodation,
+                    Id: room.Accommodation,
+                    UserOwner: {
+
+
+                    },
+                    Place: {
+                        Region: {
+                            Country: {
+
+                            }
+                        }            
+                    },
+                    AccomodationType: {
+
+                    }
                 }
         }),
              {headers: this.headers})

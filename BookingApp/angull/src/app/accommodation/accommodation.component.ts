@@ -39,9 +39,9 @@ export class AccommodationComponent implements OnInit {
     this.httpPlaceService.getPlaces().then(places => this.places = places).catch(error => this.error = error);
   }
 
- onSubmit(accomodation: any, form: NgForm) {
-    console.log(accomodation);
-    this.httpAccommodationService.postAccommodation(accomodation);
+ onSubmit(accommodation: any, form: NgForm) {
+    console.log(accommodation);
+    this.httpAccommodationService.postAccommodation(accommodation);
    //this.httpAccommodationService.postAccommodation(accomodation).subscribe(this.onPost);
     form.reset();
   }
