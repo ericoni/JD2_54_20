@@ -71,8 +71,8 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult PostAccommodation(Room room)
+        [ResponseType(typeof(Room))]
+        public IHttpActionResult PostRoom(Room room)
         {
             if (!ModelState.IsValid)
             {

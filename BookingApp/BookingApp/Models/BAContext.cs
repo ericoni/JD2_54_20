@@ -28,6 +28,5 @@ namespace BookingApp.Models
             return new BAContext();
         }
 
-       
     }
 }
