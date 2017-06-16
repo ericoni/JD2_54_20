@@ -18,7 +18,8 @@ import { LoginComponent } from './login/login.component';
 
 import { HttpUserService } from './services/http-user.service';
 import { HttpPlaceService } from './services/http-place.service';
-import { HttpAccommodationTypeService } from './services/http-accommodation-type.service' 
+import { HttpAccommodationTypeService } from './services/http-accommodation-type.service';
+import { HttpRoomService } from './services/http-room.service';
 
 import { AuthService } from './services/auth.service';
 
@@ -58,7 +59,7 @@ const Routes = [
     JsonpModule,
     FormsModule
   ],
-  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, AuthService, LoggedInGuard],
+  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService, AuthService, LoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

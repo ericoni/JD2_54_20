@@ -9,7 +9,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HttpAccommodationService{
-    //headers: Headers;
        headers: Headers;
 
     constructor (private http: Http){
@@ -106,7 +105,14 @@ export class HttpAccommodationService{
             .catch(this.handleError);
     }   
 
-     private handleError(error: any): Promise<any> {
+      getAccommodations(): Promise<Accommodation[]> {
+        return this.http.get("http://localhost:54042/api/Accommodations")
+                    .toPromise()
+                    .then(response => response.json() as Accommodation[])
+                    .catch(this.handleError);
+     }
+
+    private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }

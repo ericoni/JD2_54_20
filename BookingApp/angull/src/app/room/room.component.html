@@ -1,0 +1,25 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="RoomNumber">RoomNumber</label>
+      <input type="text" name="RoomNumber" ngModel>
+    </div>   
+     <div>
+      <label for="BedCount">BedCount</label>
+      <input type="text" name="BedCount" ngModel>
+    </div> 
+     <div>
+      <label for="Description">Description</label>
+      <input type="text" name="Description" ngModel>
+    </div> 
+     <div>
+      <label for="PricePerNight">PricePerNight</label>
+      <input type="text" name="PricePerNight" ngModel>
+    </div> 
+    <div>
+     <label for="Accommodation">Accommodation</label>
+     <select class="form-control" name="Accommodation" ngModel>
+        <option *ngFor="let at of accommodations" value="{{at.Id}}">{{at.Name}}</option>
+     </select>
+    </div>
+     <input type="submit" >
+  </form>
