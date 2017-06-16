@@ -22,6 +22,8 @@ import { HttpAccommodationTypeService } from './services/http-accommodation-type
 import { HttpRoomService } from './services/http-room.service';
 
 import { AuthService } from './services/auth.service';
+// import { NotificationService } from './services/notification.service';
+// import { NotificationsComponent } from './notifications/notifications.component';
 
 import { LoggedInGuard } from './logged-in.guard'
 
@@ -59,7 +61,7 @@ const Routes = [
     JsonpModule,
     FormsModule
   ],
-  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService, AuthService, LoggedInGuard],
+  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService,  AuthService, LoggedInGuard], //NotificationService,
   bootstrap: [AppComponent]
 })
 export class AppModule { }
