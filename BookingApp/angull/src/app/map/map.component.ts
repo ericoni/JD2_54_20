@@ -19,12 +19,12 @@ export class MapComponent implements OnInit {
 
   constructor(private accommodationService: HttpAccommodationService) { 
       
-      this.defaultInfo = new MapInfo(45.242268, 
-                                    19.842954, 
-                                    "assets/ftn.png",
-                                    "Jugodrvo" , 
-                                    "" , 
-                                    "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+      // this.defaultInfo = new MapInfo(45.242268, 
+      //                               19.842954, 
+      //                               "assets/ftn.png",
+      //                               "Jugodrvo" , 
+      //                               "" , 
+      //                               "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
   }
 
   private getAccommodations() : void {
@@ -40,10 +40,12 @@ export class MapComponent implements OnInit {
             
             this.mapInfo = new MapInfo(Number(accommodation["Latitude"]),
                                   Number(accommodation["Longitude"]),
-                                  "http://www.zosekiza.rs/wp-content/uploads/2016/02/ftn.png",
-                                  "Jugodrvo" , 
+                                  accommodation.ImageURL,
+                                  //"Jugodrvo" , 
+                                  accommodation.Name,
                                   "" , 
-                                  "http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+                                  //"http://ftn.uns.ac.rs/691618389/fakultet-tehnickih-nauka");
+                                  "http://ww1.sakopolumenta.net/");
 
             this.accomodationsMapInfo.push(this.mapInfo);
         }

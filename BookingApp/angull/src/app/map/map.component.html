@@ -11,10 +11,12 @@
       <agm-info-window [latitude]="mapInfo.centerLat" [longitude]="mapInfo.centerLong" >
 
         <!-- U info-window stavljamo html -->
-        <span style="font-size: 16px;font-family:'Times New Roman'">Fakultet tehničkih nauka</span>
+        <span style="font-size: 16px;font-family:'Times New Roman'">{{mapInfo.title}}</span>
         <br/>
-        <span style="font-family:'Times New Roman'; color:gray;"><strong>Jugodrvo</strong></span>
-        <span style="font-family:'Times New Roman'; color:gray;">Bulevar oslobođenja 131</span>
+        <span style="font-family:'Times New Roman'; color:gray;"><strong>{{mapInfo.label}}</strong></span>
+        <a [href]="mapInfo.iconUrl">See the image.</a>
+        <br/>
+        <!--<span style="font-family:'Times New Roman'; color:gray;"><strong>{{mapInfo.iconUrl}}</strong></span>-->
         <a [href]="mapInfo.link">See the site.</a>
       </agm-info-window>
 
