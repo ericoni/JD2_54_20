@@ -37,3 +37,16 @@
     </div>
      <input type="submit" >
   </form>
+
+
+    <!--<form #f2="ngForm" (ngSubmit)="onSubmit2(f2.value, f2)">-->
+  <table border="1">
+    <th> Accommodation Name</th>
+    <th> Address</th>
+    <tr *ngFor="let a of unapprovedAccommodations">
+        <td align="center">{{a.Name}}</td>
+        <td align="center">{{a.Address}}</td>
+        <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=approve(a.Id)> Approve</button>  </td>
+    </tr>
+  </table>
+  <!--</form>-->

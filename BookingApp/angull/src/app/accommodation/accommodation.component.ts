@@ -8,7 +8,8 @@ import { HttpAccommodationTypeService } from '../services/http-accommodation-typ
 
 import { Place } from '../model/place.model';
 import { User } from '../model/user.model';
-import { AccommodationType } from '../model/accommodation-type.model'
+import { AccommodationType } from '../model/accommodation-type.model';
+import { Accommodation } from '../model/accommodation.model';
 
 @Component({
   selector: 'app-accommodation',
@@ -19,6 +20,7 @@ export class AccommodationComponent implements OnInit {
   places: Place[];
   users: User[];
   accommodationTypes: AccommodationType[];
+  unapprovedAccommodations: Accommodation[];
   error: any;
   
   constructor(private httpAccommodationService: HttpAccommodationService, 
@@ -37,7 +39,8 @@ export class AccommodationComponent implements OnInit {
     // );
     this.httpAccommodationTypeService.getAccommodationTypes().then(accommodationTypes => this.accommodationTypes = accommodationTypes).catch(error => this.error = error);
     this.httpPlaceService.getPlaces().then(places => this.places = places).catch(error => this.error = error);
-  }
+    this.httpAccommodationService.getUnapprovedAccommodations().then(unapprovedAccommodations => this.unapprovedAccommodations = unapprovedAccommodations).catch(error => this.error = error);
+}
 
  onSubmit(accommodation: any, form: NgForm) {
     console.log(accommodation);
@@ -50,5 +53,19 @@ export class AccommodationComponent implements OnInit {
     alert("Post!");
     console.log(res.json());
   }
+
+  // onSubmit2(accommodation: any, form: NgForm) {
+  //   console.log(accommodation);
+  //   debugger
+  //   this.httpAccommodationService.postAccommodation(accommodation);
+  //  //this.httpAccommodationService.postAccommodation(accomodation).subscribe(this.onPost);
+  //   form.reset();
+  // }
+
+  approve(buttonId: any){
+    console.log("Usao sam" + buttonId);
+    this.httpAccommodationService.postAccommodationApproval(buttonId);
+  }
+
  
 }

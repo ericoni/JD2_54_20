@@ -87,7 +87,7 @@ export class HttpAccommodationService{
                 User: {
 
                 },
-                AccommodationType: {
+                AccomodationType: {
                     Id: accommodation.AccommodationType,
                 },
                 Place: {
@@ -97,7 +97,11 @@ export class HttpAccommodationService{
 
                         }
                     }
+                },
+                UserOwner: {
+
                 }
+                
         }),
              {headers: this.headers})
             .toPromise()
@@ -112,8 +116,45 @@ export class HttpAccommodationService{
                     .catch(this.handleError);
      }
 
+    getUnapprovedAccommodations(): Promise<Accommodation[]> {
+        return this.http.get("http://localhost:54042/api/Accommodations2")
+                    .toPromise()
+                    .then(response => response.json() as Accommodation[])
+                    .catch(this.handleError);
+     }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
+
+    postAccommodationApproval(accommodation: any): Promise<any> {
+        return this.http
+            .post('http://localhost:54042/api/Accommodations2', 
+            JSON.stringify({
+                Id: accommodation,
+                User: {
+
+                },
+                AccomodationType: {
+                    
+                },
+                Place: {
+                   
+                    Region: {
+                        Country: {
+
+                        }
+                    }
+                },
+                UserOwner: {
+
+                }
+        }),
+             {headers: this.headers})
+            .toPromise()
+            .then(res => res.json() as any)
+            .catch(this.handleError);
+    }   
+
 }

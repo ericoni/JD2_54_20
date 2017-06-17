@@ -12,6 +12,7 @@ using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
+    [RoutePrefix("api")]
     public class AccommodationsController : ApiController
     {
         private BAContext db = new BAContext();
@@ -21,6 +22,15 @@ namespace BookingApp.Controllers
         {
             return db.Accommodations;
         }
+
+        //[HttpGet]
+        //[Route("UnapprovedAccommodations")]
+        //public IQueryable<Accommodation> GetUnapprovedAccommodations()
+        //{
+        //    var unapprovedAcc = db.Accommodations.Where(u => u.Approved == false);
+        //    var a = 5;
+        //    return db.Accommodations;
+        //}
 
         // GET: api/Accommodations/5
         [ResponseType(typeof(Accommodation))]
@@ -36,6 +46,48 @@ namespace BookingApp.Controllers
         }
 
         // PUT: api/Accommodations/5
+        //[ResponseType(typeof(void))]
+     
+        //[HttpPut]
+        //[Route("rutaJebena")]
+        //public IHttpActionResult PutAccommodation(int id)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    //if (id != accommodation.Id)
+        //    //{
+        //    //    return BadRequest();
+        //    //}
+
+        //    db.Accommodations.SingleOrDefault(u => u.Id == id).Approved = true;
+        //    db.Entry(db.Accommodations.SingleOrDefault(u => u.Id == id)).State = EntityState.Modified;
+
+        //    //db.Entry(accommodation).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!AccommodationExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
+
+       
+        // PUT: api/Accommodations/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
         {
@@ -49,6 +101,8 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
 
+            //db.Accommodations.SingleOrDefault(u => u.Id == id).Approved = true;
+            
             db.Entry(accommodation).State = EntityState.Modified;
 
             try
@@ -69,10 +123,11 @@ namespace BookingApp.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+           
 
         // POST: api/Accommodations
         [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult PostAccommodation(Accommodation accommodation)
+        public IHttpActionResult PostAccommodation(Accommodation accommodation) // VRATI SE OVDE 
         {
             if (!ModelState.IsValid)
             {
@@ -84,6 +139,9 @@ namespace BookingApp.Controllers
 
             AccommodationType aType = db.AccommodationTypes.SingleOrDefault(a => a.Id == accommodation.AccomodationType.Id);
             accommodation.AccomodationType = aType;
+
+            BAIdentityUser userOwner = db.Users.SingleOrDefault(u => u.UserName == "admin");
+            accommodation.UserOwner = userOwner;
 
             db.Accommodations.Add(accommodation);
             db.SaveChanges();
