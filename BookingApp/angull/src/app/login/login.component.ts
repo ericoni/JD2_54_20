@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     returnUrl: string;
+    public token: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -33,4 +34,24 @@ export class LoginComponent implements OnInit {
         this.authService.login(user.Name, user.Pass);
             console.log(user);
     }
+
+    logout(): void {
+        // clear token remove user from local storage to log user out
+        this.token = null;
+        localStorage.removeItem('currentUser');
+    }
+
+    isLoggedIn(): boolean{
+        if (localStorage.getItem('currentUser') === null){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+    getUserName(): any{
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    return user.username;
+  }
 }

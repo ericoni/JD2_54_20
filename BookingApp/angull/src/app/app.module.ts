@@ -19,6 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpUserService } from './services/http-user.service';
 import { HttpPlaceService } from './services/http-place.service';
 import { HttpAccommodationTypeService } from './services/http-accommodation-type.service';
+import { HttpAccommodationService } from './services/http-accommodation.service';
 import { HttpRoomService } from './services/http-room.service';
 
 import { AuthService } from './services/auth.service';
@@ -26,6 +27,10 @@ import { AuthService } from './services/auth.service';
 // import { NotificationsComponent } from './notifications/notifications.component';
 
 import { LoggedInGuard } from './logged-in.guard'
+
+import { MapComponent } from './map/map.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 const Routes = [
   {path: "users", component: UserComponent},
@@ -37,7 +42,8 @@ const Routes = [
    {path: "regions", component: RegionComponent},
    {path: "countries", component: CountryComponent},
    {path: "places", component: PlaceComponent},
-   {path: "login", component: LoginComponent}
+   {path: "login", component: LoginComponent},
+   {path: "map", component: MapComponent}
 ]
 
 @NgModule({
@@ -52,16 +58,18 @@ const Routes = [
     RegionComponent,
     CountryComponent,
     PlaceComponent,
-    LoginComponent
+    LoginComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(Routes),
     HttpModule,
     JsonpModule,
-    FormsModule
+    FormsModule,
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService,  AuthService, LoggedInGuard], //NotificationService,
+  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService,  AuthService, LoggedInGuard, HttpAccommodationService], //NotificationService,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

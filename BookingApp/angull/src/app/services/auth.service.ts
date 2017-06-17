@@ -80,11 +80,9 @@ export class AuthService {
 
         let options = new RequestOptions();
         options.headers = hd;
-        debugger
 
        this.http.post('http://localhost:54042/oauth/token', `username=${username}&password=${password}&grant_type=password`, options)
             .subscribe((response: Response) => {
-                debugger
                     let token = response.json().access_token;
                     if (token) {
                         // set token property
@@ -96,6 +94,7 @@ export class AuthService {
                         // store username and jwt token in local storage to keep user logged in between page refreshes
                         localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token, role : role }));
                         console.log(this.isLoggedIn());
+                        console.log("User je: " + localStorage.getItem('currentUser'));
                         // return true to indicate successful login
                         return true;
                     } else {
@@ -118,7 +117,5 @@ export class AuthService {
         else{
             return true;
         }
-
-
     }
 }

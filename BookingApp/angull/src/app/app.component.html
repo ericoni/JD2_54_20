@@ -34,7 +34,23 @@
     <a [routerLink]="['/regions']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Regions</a>
     <a [routerLink]="['/countries']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Countries</a>
     <a [routerLink]="['/places']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Places</a>
+    <a [routerLink]="['/map']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Location</a>
+    <div *ngIf="!isLoggedIn()">
     <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log In</a>
+    </div>
+    <div *ngIf="isLoggedIn()">
+      <a (click)="logOut()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out</a>
+    <!--<div *ngIf="getUserRole() == 'Admin'">
+        <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Admin</a>
+      </div>
+      <div *ngIf="getUserRole() == 'Manager'">
+        <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Manager</a>
+      </div>
+      <div *ngIf="getUserRole() == 'AppUser'">
+        <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Client</a>
+      </div>-->
+    </div>
+    
   </div>
   <div class="w3-panel w3-large">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>

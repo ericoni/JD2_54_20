@@ -17,4 +17,26 @@ export class AppComponent {
   onItemClicked(Item) {
     this.clickedItem = Item;
   }
+
+  isLoggedIn(): boolean{
+        if (localStorage.getItem('currentUser') === null){
+            return false;
+        }
+        else{
+            return true;
+        }
+  }
+
+  getUserRole(): any{
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+    console.log("Rola je: " + user.role);
+    return user.role;
+  }
+
+  logout(): void {
+        // clear token remove user from local storage to log user out
+        //this.token = null;
+        localStorage.removeItem('currentUser');
+    }
 }
+
