@@ -1,0 +1,11 @@
+<table border="1">
+    <th> Region Name</th>
+    <th> Country </th>
+    <tr *ngFor="let a of regions">
+        <td align="center">{{a.Name}}</td>
+        <td align="center">{{a.Country.Name}}</td>
+        <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=delete(a.Id)> Delete</button>  </td>
+    </tr>
+  </table>
+
+  

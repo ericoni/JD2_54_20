@@ -29,10 +29,10 @@ export class HttpPlaceService{
     //     return this.http.get("http://localhost:54042/api/places").map(this.extractData);        
     // }
 
-    getRegions(): Observable<any> {
+    // getRegions(): Observable<any> {
 
-        return this.http.get("http://localhost:54042/api/regions").map(this.extractData);        
-    }
+    //     return this.http.get("http://localhost:54042/api/regions").map(this.extractData);        
+    // }
 
     private extractData(res: Response) {
         let body = res.json();

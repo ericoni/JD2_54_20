@@ -23,3 +23,22 @@
     </div>
      <input type="submit" >
   </form>
+
+<form>
+  <table border="1">
+    <th> Room Number</th>
+    <th> Bed Count</th>
+    <th> Description</th>
+    <th> Price Per Night</th>
+    <th> Accommodation Name</th>
+    <tr *ngFor="let r of rooms">
+        <td align="center">{{r.RoomNumber}}</td>
+        <td align="center">{{r.BedCount}}</td>
+        <td align="center">{{r.Description}}</td>
+        <td align="center">{{r.PricePerNight}}</td>
+        <td align="center">{{r.Accomodation.Name}}</td>
+        <td> <button type="submit"  name="{{r.Id}}" value="{{r.Id}}" (click)=delete(r.Id)> Delete</button>  </td>
+    </tr>
+  </table>
+</form>
+      

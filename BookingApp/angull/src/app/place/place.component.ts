@@ -2,38 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { Http, Response } from '@angular/http';
 
-import { HttpPlaceService } from '../services/http-place.service'
+import { HttpPlaceService } from '../services/http-place.service';
+import { HttpRegionService } from '../services/http-region.service'
 import { Place } from '../model/place.model';
 import { Region } from '../model/region.model';
 
 @Component({
   selector: 'app-place',
   templateUrl: './place.component.html',
-  providers: [HttpPlaceService]
+  providers: [HttpPlaceService, HttpRegionService]
 })
+
 export class PlaceComponent implements OnInit {
   places: Place[];
   regions: Region[];
+  error: any;
 
-  constructor(private httpPlaceService: HttpPlaceService) {
+  constructor(private httpPlaceService: HttpPlaceService, private httpRegionService: HttpRegionService) {
   }
 
   ngOnInit() {
-     this.httpPlaceService.getRegions().subscribe(
-      (r: any) => {this.regions = r; console.log(this.regions)},
-      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    );
+       this.httpRegionService.getRegions().then(regions => this.regions = regions).catch(error => this.error = error);
+       this.httpPlaceService.getPlaces().then(places => this.places = places).catch(error => this.error = error);
   }
 
    onSubmit(place: Place, form: NgForm) {
     console.log(place);
-    this.httpPlaceService.postPlace(place).subscribe(this.onPost);
+    this.httpPlaceService.postPlace(place);
     form.reset();
   }
 
-  onPost(res : any) : void{
-    alert("Post!");
-    console.log(res.json());
-  }
+ 
 
 }

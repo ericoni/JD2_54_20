@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -17,9 +18,10 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         // GET: api/Regions
+        [EnableQuery]
         public IQueryable<Region> GetRegions()
         {
-            return db.Regions;
+            return db.Regions.Include("Country");
         }
 
         // GET: api/Regions/5

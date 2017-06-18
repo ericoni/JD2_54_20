@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
-
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
@@ -19,9 +19,10 @@ namespace BookingApp.Controllers
 
 
         // GET: api/Accommodations
+        [EnableQuery]
         public IQueryable<Room> GetRooms()
         {
-            return db.Rooms;
+            return db.Rooms.Include("Accomodation");
         }
 
         [ResponseType(typeof(Room))]

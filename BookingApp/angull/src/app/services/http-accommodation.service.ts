@@ -10,7 +10,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class HttpAccommodationService{
     //    headers: Headers;
-       private headers = new Headers({'Content-Type': 'application/json'});
+    private headers = new Headers({'Content-Type': 'application/json'});
+    
     constructor (private http: Http){
         // this.headers = new Headers();
         // this.headers.append('Accept', 'application/json');
