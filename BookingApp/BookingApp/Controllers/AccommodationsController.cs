@@ -17,11 +17,13 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
-        [EnableQuery]
+
         // GET: api/Accommodations
+        [EnableQuery]
         public IQueryable<Accommodation> GetAccommodations()
         {
-            return db.Accommodations.Include("AccomodationType").Include("Place").Include("UserOwner").AsQueryable();
+            return db.Accommodations.Include("AccomodationType").Include("Place");// .Include("UserOwner"); 
+                                                                                  //zbog UserOwner izbacuje Error getting value from 'Claims' on 'System.Data.Entity.DynamicProxies.
         }
 
         //[HttpGet]

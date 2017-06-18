@@ -9,15 +9,15 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HttpAccommodationService{
-       headers: Headers;
-
+    //    headers: Headers;
+       private headers = new Headers({'Content-Type': 'application/json'});
     constructor (private http: Http){
-        this.headers = new Headers();
-        this.headers.append('Accept', 'application/json');
-        this.headers.append('Content-type', 'application/json');
+        // this.headers = new Headers();
+        // this.headers.append('Accept', 'application/json');
+        // this.headers.append('Content-type', 'application/json');
 
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = this.headers;
+        // const opts: RequestOptions = new RequestOptions();
+        // opts.headers = this.headers;
     }
 
     // getPlaces(): Observable<any> {
