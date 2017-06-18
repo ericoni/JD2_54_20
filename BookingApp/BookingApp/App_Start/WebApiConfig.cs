@@ -20,7 +20,7 @@ namespace BookingApp
             ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
             
             builder.EntitySet<Accommodation>("Accommodations");
-            builder.EntitySet<Room>("Rooms");
+            builder.EntitySet<Room>("Room");
             builder.EntitySet<Country>("Countries");
             builder.EntitySet<RoomReservations>("RoomReservations");
             //builder.EntitySet<Comment>("Comments");
