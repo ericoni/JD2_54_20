@@ -9,18 +9,19 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api")]
     public class AccommodationsController : ApiController
     {
         private BAContext db = new BAContext();
 
+        [EnableQuery]
         // GET: api/Accommodations
         public IQueryable<Accommodation> GetAccommodations()
         {
-            return db.Accommodations;
+            return db.Accommodations.Include("AccomodationType").Include("Place").Include("UserOwner").AsQueryable();
         }
 
         //[HttpGet]
