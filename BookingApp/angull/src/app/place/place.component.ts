@@ -32,6 +32,9 @@ export class PlaceComponent implements OnInit {
     form.reset();
   }
 
- 
+  delete(buttonId: any){
+    console.log("Usao sam u delete places" + buttonId);
+    this.httpPlaceService.delete(buttonId);
+  }
 
 }

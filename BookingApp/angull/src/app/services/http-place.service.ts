@@ -2,11 +2,14 @@ import { Injectable } from "@angular/core"
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Place } from '../model/place.model';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class HttpPlaceService{
+
+    private headers = new Headers({'Content-Type': 'application/json'});
 
     constructor (private http: Http){
 
@@ -24,34 +27,11 @@ export class HttpPlaceService{
         return Promise.reject(error.message || error);
     }
     
-    // getPlaces(): Observable<any> {
-
-    //     return this.http.get("http://localhost:54042/api/places").map(this.extractData);        
-    // }
-
-    // getRegions(): Observable<any> {
-
-    //     return this.http.get("http://localhost:54042/api/regions").map(this.extractData);        
-    // }
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || [];
-    }
-
-    postPlace(place: Place): Observable<any>  {
-     
-        const headers: Headers = new Headers();
-        headers.append('Accept', 'application/json');
-        headers.append('Content-type', 'application/json');
-
-        const opts: RequestOptions = new RequestOptions();
-        opts.headers = headers;
-
-        return this.http.post(
-        'http://localhost:54042/api/Places',
-        JSON.stringify({
-            Name: place.Name,
+ postPlace(place: any): Promise<any> {
+        return this.http
+            .post('http://localhost:54042/api/Places', 
+            JSON.stringify({
+                  Name: place.Name,
             Region: {
                 Id: place.Region,
                 Country : 
@@ -59,6 +39,20 @@ export class HttpPlaceService{
 
                 }
             }
-        }), opts);
-    }
+                
+        }),
+             {headers: this.headers})
+            .toPromise()
+            .then(res => res.json() as Place)
+            .catch(this.handleError);
+    }   
+
+    delete(id: number): Promise<void> {
+        const url = `${"http://localhost:54042/api/Places"}/${id}`;
+        return this.http.delete(url, {headers: this.headers})
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError); 
+  }
+
 }
