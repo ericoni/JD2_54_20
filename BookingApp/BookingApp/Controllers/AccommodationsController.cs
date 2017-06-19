@@ -10,12 +10,14 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
 using System.Web.Http.OData;
+using BookingApp.Hubs;
 
 namespace BookingApp.Controllers
 {
     public class AccommodationsController : ApiController
     {
         private BAContext db = new BAContext();
+        public static int accommodationCount { get; set; }
 
 
         // GET: api/Accommodations
@@ -148,6 +150,8 @@ namespace BookingApp.Controllers
 
             db.Accommodations.Add(accommodation);
             db.SaveChanges();
+
+            NotificationHub.Notify(++accommodationCount);
 
             return CreatedAtRoute("DefaultApi", new { id = accommodation.Id }, accommodation);
         }

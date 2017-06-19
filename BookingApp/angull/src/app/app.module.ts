@@ -23,8 +23,8 @@ import { HttpAccommodationService } from './services/http-accommodation.service'
 import { HttpRoomService } from './services/http-room.service';
 
 import { AuthService } from './services/auth.service';
-// import { NotificationService } from './services/notification.service';
-// import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationService } from './services/notification.service';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 import { LoggedInGuard } from './logged-in.guard'
 
@@ -59,7 +59,8 @@ const Routes = [
     CountryComponent,
     PlaceComponent,
     LoginComponent,
-    MapComponent
+    MapComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +70,7 @@ const Routes = [
     FormsModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService,  AuthService, LoggedInGuard, HttpAccommodationService], //NotificationService,
+  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService,  AuthService, LoggedInGuard, HttpAccommodationService, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

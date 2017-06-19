@@ -22,9 +22,9 @@ namespace BookingApp.Hubs
             Clients.All.hello("Hello from server");
         }
 
-        public static void Notify(int clickCount)
+        public static void Notify(int accommodationCount)
         {
-            hubContext.Clients.Group("Admins").clickNotification($"Clicks: {clickCount}");
+            hubContext.Clients.Group("Admins").clickNotification($"Clicks: {accommodationCount}");
         }
 
         public void GetTime()

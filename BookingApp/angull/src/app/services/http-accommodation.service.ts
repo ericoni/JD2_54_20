@@ -76,6 +76,7 @@ export class HttpAccommodationService{
     // }   
 
     postAccommodation(accommodation: any): Promise<any> {
+        //this.headers.append("Accept", "text/plain")
         return this.http
             .post('http://localhost:54042/api/Accommodations', 
             JSON.stringify({

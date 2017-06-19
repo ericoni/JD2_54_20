@@ -32,7 +32,7 @@ namespace BookingApp
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 			
 			var cors = new EnableCorsAttribute("*", "*", "*");
-            config.EnableCors(cors);
+            //config.EnableCors(cors);
 			
             // Web API routes
             config.MapHttpAttributeRoutes();

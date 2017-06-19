@@ -112,6 +112,8 @@ namespace BookingApp.Controllers
                     acc.Approved = true;
                     db.Entry(acc).Property(x => x.Approved).IsModified = true;
                     db.SaveChanges();
+
+                    AccommodationsController.accommodationCount--;
                    
                    
                 }
