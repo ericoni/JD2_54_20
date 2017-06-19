@@ -1,20 +1,4 @@
-<!--<a class="menu-bar" data-toggle="collapse" href="#menu">
-            <span class="bars"></span>            
-        </a>
-    	<div class="collapse menu" id="menu">
-            <ul class="list-inline">
-                <li><a [routerLink]="['/users']">Users</a></li>
-                <li><a [routerLink]="['/roomReservations']">RoomReservations</a></li>
-                <li><a [routerLink]="['/rooms']">Rooms</a></li>
-                <li><a [routerLink]="['/accommodationTypes']">AccommodationTypes</a></li>
-                <li><a [routerLink]="['/comments']">Comments</a></li>
-                <li><a [routerLink]="['/accommodations']">Accommodations</a></li>
-                <li><a [routerLink]="['/regions']">Regions</a></li>
-                <li><a [routerLink]="['/countries']">Countries</a></li>
-                <li><a [routerLink]="['/places']">Places</a></li>
-                <li><a [routerLink]="['/login']">Log In</a></li>
-            </ul>   
-    	</div>-->
+
       <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container">
@@ -39,16 +23,15 @@
     <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log In</a>
     </div>
     <div *ngIf="isLoggedIn()">
-      <a (click)="logOut()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out</a>
-    <!--<div *ngIf="getUserRole() == 'Admin'">
-        <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Admin</a>
+      <div *ngIf="getUserRole() == 'Admin'">
+        <a (click)="logout()" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Admin</a>
       </div>
       <div *ngIf="getUserRole() == 'Manager'">
         <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Manager</a>
       </div>
       <div *ngIf="getUserRole() == 'AppUser'">
         <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Client</a>
-      </div>-->
+      </div>
     </div>
     
   </div>

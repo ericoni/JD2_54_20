@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [ AuthService ]
 })
 export class AppComponent {
   title = 'app';
@@ -13,18 +15,17 @@ export class AppComponent {
     { boja: "zuta", naziv: "limun" }
   ];
 
+  constructor(private authService: AuthService) {
+  }
+
+
   public clickedItem = { name: "" };
   onItemClicked(Item) {
     this.clickedItem = Item;
   }
 
   isLoggedIn(): boolean{
-        if (localStorage.getItem('currentUser') === null){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return this.authService.isLoggedIn();
   }
 
   getUserRole(): any{
@@ -34,9 +35,7 @@ export class AppComponent {
   }
 
   logout(): void {
-        // clear token remove user from local storage to log user out
-        //this.token = null;
-        localStorage.removeItem('currentUser');
+        this.authService.logout();
     }
 }
 
