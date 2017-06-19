@@ -24,8 +24,8 @@ namespace BookingApp.Controllers
         [EnableQuery]
         public IQueryable<Accommodation> GetAccommodations()
         {
-            return db.Accommodations.Include("AccomodationType").Include("Place");// .Include("UserOwner"); 
-                                                                                  //zbog UserOwner izbacuje Error getting value from 'Claims' on 'System.Data.Entity.DynamicProxies.
+           var x = db.Accommodations.Include("AccomodationType").Include("Place");// .Include("UserOwner"); 
+            return x;                                                                       //zbog UserOwner izbacuje Error getting value from 'Claims' on 'System.Data.Entity.DynamicProxies.
         }
 
         //[HttpGet]

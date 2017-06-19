@@ -50,3 +50,36 @@
     </tr>
   </table>
   <!--</form>-->
+
+<p> Search through all accommodations </p>
+  <ul class="list">
+    <div>
+        <input type="text" [(ngModel)]="nameSearchBox" id="search" placeholder="Name">
+        <input type="text" [(ngModel)]="placeSearchBox" id="search" placeholder="Place">
+        <input type="text" [(ngModel)]="addressSearchBox" id="search" placeholder="Address">  
+        <input type="text" [(ngModel)]="typeSearchBox" id="search" placeholder="Type">
+    </div>
+
+	<br/>
+    <div >
+       <li *ngFor="let accommodation of allAccommodations | AccommodationFilterPipe: [nameSearchBox,placeSearchBox,addressSearchBox,typeSearchBox]">   
+            <div class="list">
+                <div class="topmarg">&nbsp;
+                </div>
+                <div class="accommname">
+                    {{accommodation.Name}}  
+                </div>
+                <!--<div class="accommimage"> <img alt="" /> </div>-->
+                <div class="description">
+                    Place:  {{accommodation.Place.Name}}   <br/>                 
+                    Address:  {{accommodation.Address}}   <br/>
+                    Accommodation Type: {{accommodation.AccomodationType.Name}} <br/>
+                    Description:  {{accommodation.Description}}   <br/>
+                </div>
+            </div>
+            <div>
+            </div>
+            
+        </li>
+    </div>
+</ul>

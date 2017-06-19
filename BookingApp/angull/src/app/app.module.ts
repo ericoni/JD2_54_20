@@ -31,6 +31,7 @@ import { LoggedInGuard } from './logged-in.guard'
 import { MapComponent } from './map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { AccommodationFilterPipe } from './accommodation/searchAcc.component';
 
 const Routes = [
   {path: "users", component: UserComponent},
@@ -60,7 +61,8 @@ const Routes = [
     PlaceComponent,
     LoginComponent,
     MapComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    AccommodationFilterPipe
   ],
   imports: [
     BrowserModule,
