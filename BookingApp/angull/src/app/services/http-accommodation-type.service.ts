@@ -8,6 +8,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class HttpAccommodationTypeService{
 
+    private headers = new Headers({'Content-Type': 'application/json'});
+
     constructor (private http: Http){
 
     }
@@ -23,37 +25,25 @@ export class HttpAccommodationTypeService{
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
+    
+    postAccommodationType(country: any): Promise<any> {
+        return this.http
+            .post('http://localhost:54042/api/AccommodationTypes', 
+            JSON.stringify({
+                  Name: country.Name
+                
+        }),
+             {headers: this.headers})
+            .toPromise()
+            .then(res => res.json() as AccommodationType)
+            .catch(this.handleError);
+    }   
 
-    // getAccommodationTypes(): Observable<any> {
-
-    //     return this.http.get("http://localhost:54042/api/AccommodationTypes").map(this.extractData);        
-    // }
-
-    // private extractData(res: Response) {
-    //     let body = res.json();
-    //     return body || [];
-    // }
-
-    // postPlace(place: Place): Observable<any>  {
-     
-    //     const headers: Headers = new Headers();
-    //     headers.append('Accept', 'application/json');
-    //     headers.append('Content-type', 'application/json');
-
-    //     const opts: RequestOptions = new RequestOptions();
-    //     opts.headers = headers;
-
-    //     return this.http.post(
-    //     'http://localhost:54042/api/Places',
-    //     JSON.stringify({
-    //         Name: place.Name,
-    //         Region: {
-    //             Id: place.Region,
-    //             Country : 
-    //             {
-
-    //             }
-    //         }
-    //     }), opts);
-    // }
+    delete(id: number): Promise<void> {
+        const url = `${"http://localhost:54042/api/AccommodationTypes"}/${id}`;
+        return this.http.delete(url, {headers: this.headers})
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError); 
+  }
 }

@@ -1,0 +1,23 @@
+ <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="Name" ngModel>
+    </div>
+     <input type="submit" value="Create">
+  </form>
+    
+
+<form>
+  <table border="1">
+    <th> Accommodation Type Name</th>
+    <tr *ngFor="let a of accommodationTypes">
+        <td align="center">{{a.Name}}</td>
+      <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=delete(a.Id)> Delete</button>  </td>
+      <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=update(a.Id)> Update</button>  </td>
+    </tr>
+  </table>
+  </form>   
+
+  <!--VRATI SE OVDE ZA UPDATE -->
+
+    
