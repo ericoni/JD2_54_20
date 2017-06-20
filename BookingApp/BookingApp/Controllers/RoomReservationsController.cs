@@ -19,7 +19,8 @@ namespace BookingApp.Controllers
         // GET: api/RoomReservations
         public IQueryable<RoomReservations> GetRoomReservationss()
         {
-            return db.RoomReservationss;
+            var y = db.RoomReservationss.Include("Room");
+            return y;
         }
 
         // GET: api/RoomReservations/5

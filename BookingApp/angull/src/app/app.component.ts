@@ -29,9 +29,10 @@ export class AppComponent {
   }
 
   getUserRole(): any{
-    let user = JSON.parse(localStorage.getItem("currentUser"));
-    console.log("Rola je: " + user.role);
-    return user.role;
+    // let user = JSON.parse(localStorage.getItem("currentUser"));
+    // console.log("Rola je: " + user.role);
+    // return user.role;
+    return this.authService.getUserRole();
   }
 
   logout(): void {

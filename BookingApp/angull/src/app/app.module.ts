@@ -21,6 +21,7 @@ import { HttpPlaceService } from './services/http-place.service';
 import { HttpAccommodationTypeService } from './services/http-accommodation-type.service';
 import { HttpAccommodationService } from './services/http-accommodation.service';
 import { HttpRoomService } from './services/http-room.service';
+import { HttpRoomReservationService } from './services/http-room-reservation.service';
 
 import { AuthService } from './services/auth.service';
 import { NotificationService } from './services/notification.service';
@@ -72,7 +73,7 @@ const Routes = [
     FormsModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
   ],
-  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService,  AuthService, LoggedInGuard, HttpAccommodationService, NotificationService],
+  providers: [HttpUserService, HttpPlaceService, HttpAccommodationTypeService, HttpRoomService,  AuthService, LoggedInGuard, HttpAccommodationService, NotificationService, HttpRoomReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

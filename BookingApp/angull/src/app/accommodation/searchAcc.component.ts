@@ -41,15 +41,14 @@ export class AccommodationFilterPipe implements PipeTransform {
             })
         }
         
-        // if(typeSearchBox !== undefined)
-        // {
-        //     typeSearchBox = typeSearchBox.toLowerCase();
+        if(typeSearchBox !== undefined)
+        {
+            typeSearchBox = typeSearchBox.toLowerCase();
 
-        //     //return updated accommodations array
-        //     filtredAccommodations =  filtredAccommodations.filter(function(accomm:any) {
-        //         return ((accomm.AccomodationType.Name.toLowerCase().indexOf(typeSearchBox) > -1));
-        //     })
-        // }
+            filtredAccommodations =  filtredAccommodations.filter(function(accomm:any) {
+                return ((accomm.AccomodationType.Name.toLowerCase().indexOf(typeSearchBox) > -1));
+            })
+        }
 
         return filtredAccommodations;
     }

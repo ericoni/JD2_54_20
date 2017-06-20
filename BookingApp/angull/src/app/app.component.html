@@ -20,17 +20,17 @@
     <a [routerLink]="['/places']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Places</a>
     <a [routerLink]="['/map']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Location</a>
     <div *ngIf="!isLoggedIn()">
-    <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log In</a>
+      <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log In</a>
     </div>
     <div *ngIf="isLoggedIn()">
       <div *ngIf="getUserRole() == 'Admin'">
         <a (click)="logout()" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Admin</a>
       </div>
       <div *ngIf="getUserRole() == 'Manager'">
-        <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Manager</a>
+        <a (click)="logout()" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Manager</a>
       </div>
       <div *ngIf="getUserRole() == 'AppUser'">
-        <a [routerLink]="['/login']" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out Client</a>
+        <a (click)="logout()" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Log Out User</a>
       </div>
     </div>
     

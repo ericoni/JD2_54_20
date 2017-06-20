@@ -1,0 +1,34 @@
+ <div *ngIf="isLoggedIn()">
+      <div *ngIf="getUserRole() == 'Admin'">
+          <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+            <div>
+              <label for="Start Date">StartDate</label>
+              <input type="text" name="StartDate" ngModel>
+            </div>
+            <div>
+              <label for="End Date">EndDate</label>
+              <input type="text" name="EndDate" ngModel>
+            </div> 
+            <div>
+            <label for="Room">Room Number</label>
+            <select class="form-control" name="Room" ngModel>
+                <option *ngFor="let at of rooms" value="{{at.Id}}">{{at.RoomNumber}}</option>
+            </select>
+            </div>
+            <input type="submit" value="Create">
+          </form>      
+      </div>
+    </div>
+
+  <table border="1">
+    <!--<th> Room Name</th>-->
+    <th> Number</th>
+    <tr *ngFor="let a of roomReservations">
+        <td align="center">{{a.Room.RoomNumber}}</td>
+        <!--<td align="center">{{a.Room.Accommodation.Name}} </td>-->
+        <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=delete(a.Id)> Delete</button>  </td>
+        <!--<td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=update(a.Id)> Update</button>  </td>-->
+    </tr>
+  </table>
+
+  

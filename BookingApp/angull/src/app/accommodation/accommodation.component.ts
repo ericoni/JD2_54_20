@@ -4,7 +4,8 @@ import { Http, Response } from '@angular/http';
 
 import { HttpAccommodationService } from '../services/http-accommodation.service'
 import { HttpPlaceService } from '../services/http-place.service'
-import { HttpAccommodationTypeService } from '../services/http-accommodation-type.service' 
+import { HttpAccommodationTypeService } from '../services/http-accommodation-type.service';
+import { AuthService } from '../services/auth.service';
 
 import { Place } from '../model/place.model';
 import { User } from '../model/user.model';
@@ -15,7 +16,7 @@ import { AccommodationFilterPipe } from './searchAcc.component';
 @Component({
   selector: 'app-accommodation',
   templateUrl: './accommodation.component.html',
-  providers: [HttpAccommodationService, HttpPlaceService, HttpAccommodationTypeService]
+  providers: [HttpAccommodationService, HttpPlaceService, HttpAccommodationTypeService, AuthService]
 })
 export class AccommodationComponent implements OnInit {
   places: Place[];
@@ -26,7 +27,8 @@ export class AccommodationComponent implements OnInit {
   error: any;
   
   constructor(private httpAccommodationService: HttpAccommodationService, 
-  private httpPlaceService: HttpPlaceService, private httpAccommodationTypeService: HttpAccommodationTypeService) {
+  private httpPlaceService: HttpPlaceService, private httpAccommodationTypeService: HttpAccommodationTypeService,
+  private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -43,7 +45,8 @@ export class AccommodationComponent implements OnInit {
     this.httpPlaceService.getPlaces().then(places => this.places = places).catch(error => this.error = error);
     this.httpAccommodationService.getUnapprovedAccommodations().then(unapprovedAccommodations => this.unapprovedAccommodations = unapprovedAccommodations).catch(error => this.error = error);
     this.httpAccommodationService.getAccommodations().then(allAccommodations => this.allAccommodations = allAccommodations).catch(error => this.error = error);
-  }
+    //this.authService.logout();
+}
 
  onSubmit(accommodation: any, form: NgForm) {
     console.log(accommodation);
@@ -56,6 +59,22 @@ export class AccommodationComponent implements OnInit {
     alert("Post!");
     console.log(res.json());
   }
+
+  isLoggedIn(): boolean{
+        return this.authService.isLoggedIn();
+  }
+
+  getUserRole(): any{
+    // let user = JSON.parse(localStorage.getItem("currentUser"));
+    // console.log("Rola je: " + user.role);
+    // return user.role;
+    return this.authService.getUserRole();
+  }
+
+  logout(): void {
+     this.authService.logout();
+    }
+
 
   // onSubmit2(accommodation: any, form: NgForm) {
   //   console.log(accommodation);
