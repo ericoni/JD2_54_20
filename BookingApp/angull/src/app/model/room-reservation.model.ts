@@ -15,7 +15,7 @@ export class RoomReservation{
     StartDate: Date;
     EndDate: Date;
     TimeStamp: Date;
-    AppUser: User;
+    User: User;
     Room: Room;
 
 }

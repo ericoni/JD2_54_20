@@ -2,38 +2,16 @@
       <div *ngIf="getUserRole() == 'Admin'">
           <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">           
                     <div>
-                      <label for="Name">Start date: </label>
-                    </div>
-                    <div>
-                      <label for="Day">Day: </label>
-                    <input type="text" name="startDay" [ngModel]="reservation.StartDate.getDay()">
+                      <label for="StartDate">Start Date: </label>
+                      <input class="w3-input w3-border" type="text" placeholder="mm dd yyyy" name="StartDate" required ngModel>
                     </div>
                    <div>
-                    <label for="Month">Month: </label>
-                    <input type="text" name="startMonth" [ngModel]="reservation.StartDate.getMonth()">
-                  </div>
-                  <div>
-                    <label for="Year">Year: </label>
-                    <input type="text" name="startYear" [ngModel]="reservation.StartDate.getYear()">
-                  </div>  
-                   <div>
-                      <label for="Name">End date: </label>
+                      <label for="EndDate">End Date: </label>
+                      <input class="w3-input w3-border" type="text" placeholder="mm dd yyyy" name="EndDate" required ngModel>
                     </div>
-                    <div>
-                      <label for="Day">Day: </label>
-                    <input type="text" name="endDay" [ngModel]="reservation.EndDate.getDay()">
-                    </div>
-                   <div>
-                    <label for="Month">Month: </label>
-                    <input type="text" name="endMonth" [ngModel]="reservation.EndDate.getMonth()">
-                  </div>
-                  <div>
-                    <label for="Year">Year: </label>
-                    <input type="text" name="endYear" [ngModel]="reservation.EndDate.getYear()">
-                  </div>
             <div>
               <label for="Room">Room Number</label>
-              <select class="form-control" name="Room" ngModel>
+              <select class="form-control" id="rumic" name="Room" ngModel>
                   <option *ngFor="let at of rooms" value="{{at.Id}}">{{at.RoomNumber}}</option>
               </select>
             </div>

@@ -38,26 +38,20 @@ export class RoomReservationComponent implements OnInit {
     this.reservation.EndDate = new Date();
   }
 
- onSubmit(roomResParameter: any, form: NgForm) {
-    //console.log(roomResParameter);
-
-    //this.httpRoomReservationService.postRoomReservation(roomResParameter); // nije uradjeno vrati se
-    this.reservation.StartDate.setDate(roomResParameter.startDate);
-    this.reservation.StartDate.setMonth(roomResParameter.startMonth);
-    this.reservation.StartDate.setFullYear(roomResParameter.startYear);
-
-    this.reservation.EndDate.setDate(roomResParameter.endData);
-    this.reservation.EndDate.setMonth(roomResParameter.endMonth);
-    this.reservation.EndDate.setFullYear(roomResParameter.endYear);
+ onSubmit(roomResParameter: RoomReservation, form: NgForm) {
+    this.reservation.StartDate = roomResParameter.StartDate;
+    this.reservation.EndDate = roomResParameter.EndDate;
     this.reservation.Room = new Room();
-    this.reservation.Room.Id = roomResParameter.Room;
-    this.reservation.TimeStamp = new Date();
-    this.reservation.AppUser = new User();
-    // this.reservation.user.id = 1;
-    console.log("cakija"); 
-    console.log(this.reservation);
+    this.reservation.Room.Id =  Number.parseInt((<HTMLInputElement>document.getElementById("rumic")).value);
+    this.reservation.User = new User();
+
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+
+
+    this.reservation.User.Username = user.username;
+    debugger
+    this.httpRoomReservationService.postRoomReservation(this.reservation); 
     form.reset();
-    
   }
 
   delete(buttonId: any){

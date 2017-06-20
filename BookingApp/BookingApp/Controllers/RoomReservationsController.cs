@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BookingApp.Controllers
 {
@@ -82,18 +83,20 @@ namespace BookingApp.Controllers
         // POST: api/RoomReservations
         [ResponseType(typeof(RoomReservations))]
         public IHttpActionResult PostRoomReservations(RoomReservations roomReservations)
-        {
-            return StatusCode(HttpStatusCode.OK);
-
+        {   
+            var roomRes = roomReservations;
+            roomRes.Room = db.Rooms.Include("Accomodation").SingleOrDefault(r => r.Id == roomReservations.Room.Id);
+            roomRes.User = db.Users.SingleOrDefault(u => u.UserName == roomReservations.User.UserName);
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.RoomReservationss.Add(roomReservations);
+            db.RoomReservationss.Add(roomRes);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = roomReservations.Id }, roomReservations);
+            return CreatedAtRoute("DefaultApi", new { id = roomRes.Id }, roomRes);
         }
 
         // DELETE: api/RoomReservations/5

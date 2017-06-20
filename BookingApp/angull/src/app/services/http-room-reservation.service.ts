@@ -28,18 +28,38 @@ export class HttpRoomReservationService{
         return Promise.reject(error.message || error);
     }
     
- postRoomReservation(place: any): Promise<any> {
+ postRoomReservation(roomReservation: RoomReservation): Promise<any> {
         return this.http
             .post('http://localhost:54042/api/RoomReservations', 
+            //JSON.stringify(roomReservation),
             JSON.stringify({
-            //       Name: place.Name,
-            // Region: {
-            //     Id: place.Region,
-            //     Country : 
-            //     {
+                        StartDate: roomReservation.StartDate,
+                        EndDate: roomReservation.EndDate,
+                        TimeStamp: roomReservation.TimeStamp,
+                        User:{
+                            Username: roomReservation.User.Username
+                        },
+                        Room: {
+                            Id: roomReservation.Room.Id,
+                            Accomodation: {
+                   
+                                UserOwner: {
 
-            //     }
-            // }
+
+                                },
+                                Place: {
+                                    Region: {
+                                        Country: {
+
+                                        }
+                                    }            
+                                },
+                                AccomodationType: {
+
+                                }
+                             }
+
+                        }
                 
         }),
              {headers: this.headers}) 

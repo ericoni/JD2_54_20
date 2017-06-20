@@ -74,6 +74,6 @@ export class AuthService {
   }
     getUserName(): any{
         let user = JSON.parse(localStorage.getItem("currentUser"));
-        return user.name;
+        return user.username;
   }
 }

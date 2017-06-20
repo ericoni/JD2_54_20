@@ -9,6 +9,7 @@ export class User{
     // public Accomodations: Accommodation[]){
 
     // }
+    Id: number;
     Username: string;
     Email: string;
     Password: string;

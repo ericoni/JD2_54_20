@@ -10,7 +10,7 @@ export class Accommodation{
     public Address: string, public AvrageGrade: number,
     public Latitude: string, public Longitude: string,
     public ImageURL: string, public Approved: boolean,
-    public AppUser: User, public Rooms: Room[],
+    public User: User, public Rooms: Room[],
     public Comments: Comment[], public AccommodationType: AccommodationType,
     public Place: Place
      ){
