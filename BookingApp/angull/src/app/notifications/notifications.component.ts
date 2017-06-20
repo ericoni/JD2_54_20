@@ -1,6 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { NotificationService } from '../services/notification.service';
 import { HttpAccommodationService } from '../services/http-accommodation.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'notifications',
@@ -13,7 +14,7 @@ export class NotificationsComponent implements OnInit {
   notifications: string[];
   time: string;
 
-  constructor(private notifService: NotificationService, private accommService : HttpAccommodationService, private ngZone: NgZone) {
+  constructor(private notifService: NotificationService, private authService : AuthService, private ngZone: NgZone) {
     this.isConnected = false;
     this.notifications = [];
    }

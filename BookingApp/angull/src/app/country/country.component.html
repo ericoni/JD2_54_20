@@ -1,0 +1,33 @@
+ <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="Name" ngModel>
+    </div>
+    <div>
+     <label for="Code">Code</label>
+     <input type="text" name="Code" ngModel>
+    </div>
+     <input type="submit" value="Create">
+  </form>
+    
+
+<form>
+  <table border="1">
+    <th> Country Name</th>
+    <th> Code </th>
+    <tr *ngFor="let a of countries">
+        <td align="center">{{a.Name}}</td>
+         <!--<td align="center">  <input type="text" name="Name" ngModel> </td>-->
+        <td align="center">{{a.Code}}</td>
+       <!--<td><select class="form-control" name="Region" ngModel>
+         <option *ngFor="let r of regions" value="{{r.Id}}" [selected]={{a.Region.Name}}==r.Name >{{r.Name}}</option>
+        </select> </td>-->
+      <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=delete(a.Id)> Delete</button>  </td>
+      <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=update(a.Id)> Update</button>  </td>
+    </tr>
+  </table>
+  </form>   
+
+  <!--VRATI SE OVDE ZA UPDATE -->
+
+    
