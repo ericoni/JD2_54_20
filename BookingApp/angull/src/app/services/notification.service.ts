@@ -30,6 +30,8 @@ export class NotificationService {
         // register on server events  
         this.registerOnServerEvents();
 
+        this.registerOnServerEventsForMagangers();
+
         this.registerForTimerEvents(); 
         // call the connecion start method to start the connection to send and receive events. 
         this.startConnection(); 
@@ -54,6 +56,14 @@ export class NotificationService {
     private registerOnServerEvents(): void {  
         
         this.proxy.on('clickNotification', (data: string) => {  
+            console.log('received notification: ' + data);  
+            this.notificationReceived.emit(data);  
+        }); 
+    }  
+
+    private registerOnServerEventsForMagangers(): void {  
+        
+        this.proxy.on('approvedNotification', (data: string) => {  
             console.log('received notification: ' + data);  
             this.notificationReceived.emit(data);  
         }); 

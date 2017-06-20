@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BookingApp.Models;
 using System.Data.Entity.Validation;
+using BookingApp.Hubs;
 
 namespace BookingApp.Controllers
 {
@@ -114,8 +115,9 @@ namespace BookingApp.Controllers
                     db.SaveChanges();
 
                     AccommodationsController.accommodationCount--;
-                   
-                   
+                    NotificationHub.NotifyManagers();
+
+
                 }
 
             }

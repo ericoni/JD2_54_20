@@ -24,7 +24,12 @@ namespace BookingApp.Hubs
 
         public static void Notify(int accommodationCount)
         {
-            hubContext.Clients.Group("Admins").clickNotification($"Clicks: {accommodationCount}");
+            hubContext.Clients.Group("Admins").clickNotification($"New Accommodations: {accommodationCount}");
+        }
+
+        public static void NotifyManagers()
+        {
+            hubContext.Clients.Group("Managers").approvedNotification($"Accommodation is approved.");
         }
 
         public void GetTime()
@@ -55,6 +60,7 @@ namespace BookingApp.Hubs
             //var identityName = Context.User.Identity.Name;
 
             Groups.Add(Context.ConnectionId, "Admins");
+            Groups.Add(Context.ConnectionId, "Managers");
 
             //if (Context.User.IsInRole("Admin"))
             //{
@@ -67,6 +73,7 @@ namespace BookingApp.Hubs
         public override Task OnDisconnected(bool stopCalled)
         {
             Groups.Remove(Context.ConnectionId, "Admins");
+            Groups.Remove(Context.ConnectionId, "Managers");
 
             //if (Context.User.IsInRole("Admin"))
             //{
