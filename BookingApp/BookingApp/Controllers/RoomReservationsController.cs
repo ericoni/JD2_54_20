@@ -19,8 +19,16 @@ namespace BookingApp.Controllers
         // GET: api/RoomReservations
         public IQueryable<RoomReservations> GetRoomReservationss()
         {
-            var y = db.RoomReservationss.Include("Room");
-            return y;
+            var roomReservationsList = db.RoomReservationss.Include("Room").ToList();
+
+            for (int i = 0; i < roomReservationsList.Count; i++)
+            {
+                var roomId = roomReservationsList[i].Room.Id;
+                var room = db.Rooms.Include("Accomodation").SingleOrDefault(r => r.Id == roomId);
+                var accommodation = db.Accommodations.SingleOrDefault(a => a.Id == room.Accomodation.Id);
+                roomReservationsList[i].Room.Accomodation = accommodation;
+            }
+            return roomReservationsList.AsQueryable();
         }
 
         // GET: api/RoomReservations/5
@@ -75,6 +83,8 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(RoomReservations))]
         public IHttpActionResult PostRoomReservations(RoomReservations roomReservations)
         {
+            return StatusCode(HttpStatusCode.OK);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

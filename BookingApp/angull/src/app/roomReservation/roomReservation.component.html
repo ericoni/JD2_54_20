@@ -1,19 +1,41 @@
  <div *ngIf="isLoggedIn()">
       <div *ngIf="getUserRole() == 'Admin'">
-          <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+          <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">           
+                    <div>
+                      <label for="Name">Start date: </label>
+                    </div>
+                    <div>
+                      <label for="Day">Day: </label>
+                    <input type="text" name="startDay" [ngModel]="reservation.StartDate.getDay()">
+                    </div>
+                   <div>
+                    <label for="Month">Month: </label>
+                    <input type="text" name="startMonth" [ngModel]="reservation.StartDate.getMonth()">
+                  </div>
+                  <div>
+                    <label for="Year">Year: </label>
+                    <input type="text" name="startYear" [ngModel]="reservation.StartDate.getYear()">
+                  </div>  
+                   <div>
+                      <label for="Name">End date: </label>
+                    </div>
+                    <div>
+                      <label for="Day">Day: </label>
+                    <input type="text" name="endDay" [ngModel]="reservation.EndDate.getDay()">
+                    </div>
+                   <div>
+                    <label for="Month">Month: </label>
+                    <input type="text" name="endMonth" [ngModel]="reservation.EndDate.getMonth()">
+                  </div>
+                  <div>
+                    <label for="Year">Year: </label>
+                    <input type="text" name="endYear" [ngModel]="reservation.EndDate.getYear()">
+                  </div>
             <div>
-              <label for="Start Date">StartDate</label>
-              <input type="text" name="StartDate" ngModel>
-            </div>
-            <div>
-              <label for="End Date">EndDate</label>
-              <input type="text" name="EndDate" ngModel>
-            </div> 
-            <div>
-            <label for="Room">Room Number</label>
-            <select class="form-control" name="Room" ngModel>
-                <option *ngFor="let at of rooms" value="{{at.Id}}">{{at.RoomNumber}}</option>
-            </select>
+              <label for="Room">Room Number</label>
+              <select class="form-control" name="Room" ngModel>
+                  <option *ngFor="let at of rooms" value="{{at.Id}}">{{at.RoomNumber}}</option>
+              </select>
             </div>
             <input type="submit" value="Create">
           </form>      
@@ -22,10 +44,13 @@
 
   <table border="1">
     <!--<th> Room Name</th>-->
-    <th> Number</th>
+    <th> Room Number</th>
+    <th> Accomodation Name</th>
+    <th> Bed Count</th>
     <tr *ngFor="let a of roomReservations">
         <td align="center">{{a.Room.RoomNumber}}</td>
-        <!--<td align="center">{{a.Room.Accommodation.Name}} </td>-->
+        <td align="center">{{a.Room.Accomodation.Name}} </td>
+        <td align="center">{{a.Room.BedCount}} </td>
         <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=delete(a.Id)> Delete</button>  </td>
         <!--<td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=update(a.Id)> Update</button>  </td>-->
     </tr>
