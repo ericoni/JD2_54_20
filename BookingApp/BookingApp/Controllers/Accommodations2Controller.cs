@@ -115,7 +115,7 @@ namespace BookingApp.Controllers
                     db.SaveChanges();
 
                     AccommodationsController.accommodationCount--;
-                    NotificationHub.NotifyManagers();
+                    NotificationHub.NotifyManager(acc.UserOwner.UserName);
 
 
                 }

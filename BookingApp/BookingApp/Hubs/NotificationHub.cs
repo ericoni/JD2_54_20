@@ -24,12 +24,12 @@ namespace BookingApp.Hubs
 
         public static void Notify(int accommodationCount)
         {
-            hubContext.Clients.Group("Admins").clickNotification($"New Accommodations: {accommodationCount}");
+            hubContext.Clients.Group("Admins").clickNotification($"New Accommodations: {accommodationCount} Role:Admin");
         }
 
-        public static void NotifyManagers()
+        public static void NotifyManager(string owner)
         {
-            hubContext.Clients.Group("Managers").approvedNotification($"Accommodation is approved.");
+            hubContext.Clients.Group("Managers").approvedNotification($"Accommodation is approved. Role:Manager User:{owner}");
         }
 
         public void GetTime()

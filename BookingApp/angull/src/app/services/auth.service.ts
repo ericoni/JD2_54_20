@@ -72,4 +72,8 @@ export class AuthService {
         console.log("Rola je: " + user.role);
         return user.role;
   }
+    getUserName(): any{
+        let user = JSON.parse(localStorage.getItem("currentUser"));
+        return user.name;
+  }
 }

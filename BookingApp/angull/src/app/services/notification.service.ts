@@ -1,6 +1,8 @@
 // import the packages  
 import { Injectable, EventEmitter } from '@angular/core';
 
+import { AuthService } from '../services/auth.service';
+
 // declare the global variables  
 declare var $: any;  
 
@@ -9,7 +11,7 @@ export class NotificationService {
     // Declare the variables  
     private proxy: any;  
     private proxyName: string = 'notifications';  
-    private connection: any;  
+    private connection: any;
 
     // create the Event Emitter  
     public notificationReceived: EventEmitter < string >;  
@@ -17,7 +19,7 @@ export class NotificationService {
     public timeReceived: EventEmitter< string >;
     public connectionExists: Boolean;  
    
-    constructor() {  
+    constructor(private authService: AuthService) {  
         // Constructor initialization  
         this.connectionEstablished = new EventEmitter < Boolean > ();  
         this.notificationReceived = new EventEmitter < string > (); 
@@ -57,7 +59,9 @@ export class NotificationService {
         
         this.proxy.on('clickNotification', (data: string) => {  
             console.log('received notification: ' + data);  
-            this.notificationReceived.emit(data);  
+            if(data.includes('Role:'+this.authService.getUserRole())/* && data.includes('User:'+this.authService.getUserName())*/){
+                this.notificationReceived.emit(data);  
+            }
         }); 
     }  
 
@@ -65,7 +69,10 @@ export class NotificationService {
         
         this.proxy.on('approvedNotification', (data: string) => {  
             console.log('received notification: ' + data);  
-            this.notificationReceived.emit(data);  
+
+            if(data.includes('Role:'+this.authService.getUserRole())/* && data.includes('User:'+this.authService.getUserName())*/){
+                this.notificationReceived.emit(data);  
+            }
         }); 
     }  
 
