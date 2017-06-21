@@ -70,8 +70,8 @@ export class NotificationService {
         this.proxy.on('approvedNotification', (data: string) => {  
             console.log('received notification: ' + data);  
 
-            if(data.includes('Role:'+this.authService.getUserRole())/* && data.includes('User:'+this.authService.getUserName())*/){
-                this.notificationReceived.emit(data);  
+            if(data.includes('Role:'+this.authService.getUserRole()) && data.includes('User:'+this.authService.getUserName())){
+                this.notificationReceived.emit(data);
             }
         }); 
     }  
