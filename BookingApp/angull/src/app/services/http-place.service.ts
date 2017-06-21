@@ -55,4 +55,23 @@ export class HttpPlaceService{
         .catch(this.handleError); 
   }
 
+    update(id: number, place: any): Promise<void> {
+        console.log("Dobio sam na servisu: ");
+        console.log(place);
+
+        const url = `${"http://localhost:54042/api/Places"}/${id}`;
+        return this.http.put(url, JSON
+        .stringify({
+            Id: id,
+            Name: place.Place,
+            Region: {
+                Id: place.Region
+            }
+        }), {headers: this.headers})
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError); 
+  }
+
+
 }

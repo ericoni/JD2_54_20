@@ -38,7 +38,15 @@ namespace BookingApp.Controllers
         // PUT: api/Places/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPlace(int id, Place place)
-        {
+        {         
+            var placeName = place.Name;
+
+            Place oldPlace = db.Places.Include("Region").SingleOrDefault(p => p.Id == place.Id);
+            Region region = db.Regions.Include("Country").Single(r => r.Id == place.Region.Id);
+            place.Region = region;
+            place.Name = placeName;
+
+          
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -49,7 +57,8 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
 
-            db.Entry(place).State = EntityState.Modified;
+            //db.Entry(place).State = EntityState.Modified; 
+            db.Entry(oldPlace).CurrentValues.SetValues(place); 
 
             try
             {

@@ -17,8 +17,10 @@ export class PlaceComponent implements OnInit {
   places: Place[];
   regions: Region[];
   error: any;
+  place: Place;
 
   constructor(private httpPlaceService: HttpPlaceService, private httpRegionService: HttpRegionService) {
+    this.place = new Place(100, "Plejsic", 3000, null, null);
   }
 
   ngOnInit() {
@@ -35,6 +37,13 @@ export class PlaceComponent implements OnInit {
   delete(buttonId: any){
     console.log("Usao sam u delete places" + buttonId);
     this.httpPlaceService.delete(buttonId);
+  }
+
+   update(buttonId: any, place: any){
+   // console.log("Usao sam u update places" + buttonId);
+    this.httpPlaceService.update(buttonId, place);
+    
+    //this.httpPlaceService.delete(buttonId);
   }
 
 }
