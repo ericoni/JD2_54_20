@@ -16,35 +16,16 @@ export class HttpRegionService{
       
     }
 
-    postRegion(accommodation: any): Promise<any> {
+    postRegion(region: any): Promise<any> {
         return this.http
             .post('http://localhost:54042/api/Regions', 
             JSON.stringify({
-                Name: accommodation.Name,
-                Address: accommodation.Address,
-                Description: accommodation.Description,
-                Latitude: accommodation.Latitude,
-                Longitude: accommodation.Longitude,
-                ImageURL: accommodation.ImageURL,
-                User: {
-
-                },
-                AccomodationType: {
-                    Id: accommodation.AccommodationType,
-                },
-                Place: {
-                    Id: accommodation.Place,
-                    Region: {
-                        Country: {
-
-                        }
-                    }
-                },
-                UserOwner: {
-
-                }
-                
+                Name: region.Name,    
+                Country: {
+                    Name: region.Country
+                }         
         }),
+          //   JSON.stringify(region),
              {headers: this.headers})
             .toPromise()
             .then(res => res.json() as Region)

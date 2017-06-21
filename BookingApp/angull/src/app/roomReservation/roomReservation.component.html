@@ -25,12 +25,16 @@
     <th> Room Number</th>
     <th> Accomodation Name</th>
     <th> Bed Count</th>
+    <th> Reservation Start Date</th>
+    <th> Reservation End Date</th>
     <tr *ngFor="let a of roomReservations">
         <td align="center">{{a.Room.RoomNumber}}</td>
         <td align="center">{{a.Room.Accomodation.Name}} </td>
         <td align="center">{{a.Room.BedCount}} </td>
+        <td align="center">{{a.StartDate}} </td>
+        <td align="center">{{a.EndDate}} </td>
         <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=delete(a.Id)> Delete</button>  </td>
-        <!--<td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=update(a.Id)> Update</button>  </td>-->
+       <td> <button type="submit"  name="{{a.Id}}" value="{{a.Id}}" (click)=update(a.Id)> Update</button>  </td>
     </tr>
   </table>
 

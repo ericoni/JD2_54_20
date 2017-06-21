@@ -4,6 +4,7 @@ import { Http, Response } from '@angular/http';
 
 import { HttpRegionService } from '../services/http-region.service'
 import { HttpPlaceService } from '../services/http-place.service'
+import { AuthService } from '../services/auth.service'
 
 import { Region } from '../model/region.model';
 import { Place } from '../model/place.model';
@@ -11,14 +12,16 @@ import { Place } from '../model/place.model';
 @Component({
   selector: 'app-region',
   templateUrl: './region.component.html',
-   providers: [HttpRegionService, HttpPlaceService]
+   providers: [HttpRegionService, HttpPlaceService, AuthService]
 })
 export class RegionComponent implements OnInit {
   regions: Region[];
   places: Place[];
   error: any;
 
-  constructor(private httpRegionService: HttpRegionService, private httpPlaceService: HttpPlaceService) {
+  constructor(private httpRegionService: HttpRegionService,
+   private httpPlaceService: HttpPlaceService,
+   private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -26,7 +29,7 @@ export class RegionComponent implements OnInit {
     this.httpPlaceService.getPlaces().then(places => this.places = places).catch(error => this.error = error);
   }
 
-  onSubmit(region: any, form: NgForm) {
+  onSubmit(region: Region, form: NgForm) {
     console.log(region);
     this.httpRegionService.postRegion(region);
     form.reset();
@@ -38,6 +41,13 @@ export class RegionComponent implements OnInit {
     this.httpRegionService.delete(buttonId);
   }
 
+  isLoggedIn(): boolean{
+    return this.authService.isLoggedIn();
+  }
+
+  getUserRole(): any{
+    return this.authService.getUserRole();
+  }
 
 
 }
