@@ -67,8 +67,46 @@
     </div>
 
 	<br/>
-    <div >
-       <li *ngFor="let accommodation of allAccommodations | AccommodationFilterPipe: [nameSearchBox,placeSearchBox,addressSearchBox,typeSearchBox]">   
+    <div *ngIf="pageNumber == 1">
+       <li *ngFor="let accommodation of allAccommodations1 | AccommodationFilterPipe: [nameSearchBox,placeSearchBox,addressSearchBox,typeSearchBox]">   
+            <div class="list">
+                <div class="accommname">
+                    {{accommodation.Name}}  
+                </div>
+                <!--<div class="accommimage"> <img alt="" /> </div>-->
+                <div class="description">
+                    Place:  {{accommodation.Place.Name}}   <br/>                 
+                    Address:  {{accommodation.Address}}   <br/>
+                    Accommodation Type: {{accommodation.AccomodationType.Name}} <br/>
+                    Description:  {{accommodation.Description}}   <br/>
+                </div>
+            </div>
+            <div>
+            </div>
+            
+        </li>
+    </div>
+    <div *ngIf="pageNumber == 2">
+       <li *ngFor="let accommodation of allAccommodations2 | AccommodationFilterPipe: [nameSearchBox,placeSearchBox,addressSearchBox,typeSearchBox]">   
+            <div class="list">
+                <div class="accommname">
+                    {{accommodation.Name}}  
+                </div>
+                <!--<div class="accommimage"> <img alt="" /> </div>-->
+                <div class="description">
+                    Place:  {{accommodation.Place.Name}}   <br/>                 
+                    Address:  {{accommodation.Address}}   <br/>
+                    Accommodation Type: {{accommodation.AccomodationType.Name}} <br/>
+                    Description:  {{accommodation.Description}}   <br/>
+                </div>
+            </div>
+            <div>
+            </div>
+            
+        </li>
+    </div>
+    <div *ngIf="pageNumber == 3">
+       <li *ngFor="let accommodation of allAccommodations3 | AccommodationFilterPipe: [nameSearchBox,placeSearchBox,addressSearchBox,typeSearchBox]">   
             <div class="list">
                 <div class="accommname">
                     {{accommodation.Name}}  
@@ -87,3 +125,10 @@
         </li>
     </div>
 </ul>
+<div>
+    <ul>
+        <li><button type="submit" (click)=onPage(1)> Page [1]</button></li>
+        <li><button type="submit" (click)=onPage(2)> Page [2]</button></li>
+        <li><button type="submit" (click)=onPage(3)> Page [3]</button></li>
+    </ul>
+</div>
